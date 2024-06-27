@@ -20,9 +20,9 @@ projectService = inject(ProjectService);
     // {value: 'pizza-1', viewValue: 'Pizza'},
     // {value: 'tacos-2', viewValue: 'Tacos'},
 
-    {value: 1, viewValue: 'ECR'},
-    {value: 2, viewValue: 'New Project'},
-    {value: 3, viewValue: 'Next Project'}
+    {id: 1, name: 'ECR'},
+    {id: 2, name: 'New Project'},
+    {id: 3, name: 'Next Project'}
 
   ];
 
