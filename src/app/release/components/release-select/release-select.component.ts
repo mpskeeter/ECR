@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { SelectComponent } from '../../../core/select/select.component';
-import {Item} from '../../../core/item';
+import {Release} from '../../../core/interfaces/release';
 import { ReleaseService } from '../../services/release.service';
 import { AsyncPipe } from '@angular/common'; 
 
@@ -16,7 +16,7 @@ export class ReleaseSelectComponent {
   releaseService = inject(ReleaseService);
 
 
-  releases: Item[] = [
+  releases: Release[] = [
     // {value: 'steak-0', viewValue: 'Steak'},
     // {value: 'pizza-1', viewValue: 'Pizza'},
     // {value: 'tacos-2', viewValue: 'Tacos'},

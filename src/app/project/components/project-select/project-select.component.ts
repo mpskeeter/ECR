@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { SelectComponent } from '../../../core/select/select.component';
-import {Item} from '../../../core/item';
+import {Project} from '../../../core/interfaces/project';
 import { ProjectService } from '../../services/project.service';
 import { AsyncPipe } from '@angular/common';
 
@@ -15,7 +15,7 @@ export class ProjectSelectComponent {
 
 projectService = inject(ProjectService);
 
-  projects: Item[] = [
+  projects: Project[] = [
     // {value: 'steak-0', viewValue: 'Steak'},
     // {value: 'pizza-1', viewValue: 'Pizza'},
     // {value: 'tacos-2', viewValue: 'Tacos'},
