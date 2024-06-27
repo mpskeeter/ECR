@@ -21,8 +21,8 @@ export class ReleaseSelectComponent {
     // {value: 'pizza-1', viewValue: 'Pizza'},
     // {value: 'tacos-2', viewValue: 'Tacos'},
 
-    {parent:1, value: 1, viewValue: 'RC-1'},
-    {parent:2, value: 2, viewValue: 'RC-2'}
+    {projectId:1, id: 1, name: 'RC-1'},
+    {projectId:2, id: 2, name: 'RC-2'}
   ];
 
   label = 'Release';
