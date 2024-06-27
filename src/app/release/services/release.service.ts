@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../../core/item';
+import { Release } from '../../core/interfaces/release';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,11 +7,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ReleaseService {
 
-  items = new BehaviorSubject<Item[]>([]);
+  items = new BehaviorSubject<Release[]>([]);
   items$ = this.items.asObservable();
 
   constructor() { }
 
-  setValue = (newValue:Item[]) => this.items.next(newValue);
-  
+  setValue = (newValue:Release[]) => this.items.next(newValue);
+
 }

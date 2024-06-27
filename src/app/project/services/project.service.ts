@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../../core/item';
+import { Project } from '../../core/interfaces/project';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  items = new BehaviorSubject<Item[]>([]);
+  items = new BehaviorSubject<Project[]>([]);
   items$ = this.items.asObservable();
 
   constructor() { }
 
-setValue = (newValue:Item[]) => this.items.next(newValue);
+setValue = (newValue:Project[]) => this.items.next(newValue);
 
 }
