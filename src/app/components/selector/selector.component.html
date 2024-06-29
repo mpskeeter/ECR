@@ -1,0 +1,7 @@
+<pre>{{project()}}</pre>
+<app-project-select [(project)]="project" />
+@if(project().length > 0) {
+  <!-- <app-release-select [project]="project()" /> -->
+  <!-- <app-branch-select [project]="project()" /> -->
+  <app-commit-select [project]="project()" />
+}
