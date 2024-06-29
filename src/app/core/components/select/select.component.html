@@ -1,0 +1,14 @@
+<h4>{{ label }}</h4>
+<mat-form-field>
+  <mat-label>{{ label }}</mat-label>
+  <mat-select (selectionChange)="selected.emit($event.value)">
+    @if (items && items.length > 0) {
+      @for (Item of items; track Item) {
+        <mat-option [value]="Item?.name">{{Item?.name}}</mat-option>
+      }
+    }
+    @else {
+      <p>None...</p>
+    }
+  </mat-select>
+</mat-form-field>
