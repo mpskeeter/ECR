@@ -1,1 +1,1 @@
-<app-select [items]="projectService.items$ | async" [label] = "label"></app-select>
+<app-select [items]="projectService.items$ | async" [label] = "label" (selected)="setProject($event)"></app-select>
