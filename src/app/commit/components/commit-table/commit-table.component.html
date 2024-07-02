@@ -1,3 +1,5 @@
-<app-table
-[rows]="(service.items$ | async) || []" [columns]="columnDef" />
+<app-scrollable [height]="600">
+    <app-table
+    [rows]="(service.items$ | async) || []" [columns]="columnDef" />
+</app-scrollable>
 
