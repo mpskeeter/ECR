@@ -1,9 +1,0 @@
-<h4>Basic mat-select</h4>
-<mat-form-field>
-  <mat-label>{{ label }}</mat-label>
-  <mat-select>
-    @for (Item of items; track Item) {
-      <mat-option [value]="Item?.value">{{Item?.viewValue}}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>

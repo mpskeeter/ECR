@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
-import { SelectComponent } from '../../../core/select/select.component';
-import {Item} from '../../../core/item';
-import { ReleaseService } from '../../services/release.service';
+import { Component, Input, effect, inject, input } from '@angular/core';
+import { SelectComponent } from '../../../core/components/select/select.component';
+import { ReleaseService } from '../../../github/services/release.service';
 import { AsyncPipe } from '@angular/common'; 
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-release-select',
@@ -14,21 +14,12 @@ import { AsyncPipe } from '@angular/common';
 export class ReleaseSelectComponent {
 
   releaseService = inject(ReleaseService);
-
-
-  releases: Item[] = [
-    // {value: 'steak-0', viewValue: 'Steak'},
-    // {value: 'pizza-1', viewValue: 'Pizza'},
-    // {value: 'tacos-2', viewValue: 'Tacos'},
-
-    {parent:1, value: 1, viewValue: 'RC-1'},
-    {parent:2, value: 2, viewValue: 'RC-2'}
-  ];
+  authService = inject(AuthService);
 
   label = 'Release';
 
-  ngOnInit(){
-    this.releaseService.setValue(this.releases);
+  constructor(){
+    effect(() => this.releaseService.getForRepository());
   }
 
 }

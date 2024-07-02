@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../../core/item';
-import { BehaviorSubject } from 'rxjs';
+import { Project } from '../../core/interfaces/project';
+import { BaseCrudService } from '../../core/services/base-crud.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
-  items = new BehaviorSubject<Item[]>([]);
-  items$ = this.items.asObservable();
-
-  constructor() { }
-
-setValue = (newValue:Item[]) => this.items.next(newValue);
-
+export class ProjectService extends BaseCrudService<Project> {
+  
+  constructor() { super() }
 }
