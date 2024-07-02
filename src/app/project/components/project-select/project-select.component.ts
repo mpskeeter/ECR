@@ -1,8 +1,10 @@
-import { Component, inject } from '@angular/core';
-import { SelectComponent } from '../../../core/select/select.component';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { SelectComponent } from '../../../core/components/select/select.component';
 import {Project} from '../../../core/interfaces/project';
 import { ProjectService } from '../../services/project.service';
 import { AsyncPipe } from '@angular/common';
+import { RepositoryService } from '../../../github/services/repository.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-project-select',
@@ -12,24 +14,15 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './project-select.component.scss'
 })
 export class ProjectSelectComponent {
-
-projectService = inject(ProjectService);
-
-  projects: Project[] = [
-    // {value: 'steak-0', viewValue: 'Steak'},
-    // {value: 'pizza-1', viewValue: 'Pizza'},
-    // {value: 'tacos-2', viewValue: 'Tacos'},
-
-    {id: 1, name: 'ECR'},
-    {id: 2, name: 'New Project'},
-    {id: 3, name: 'Next Project'}
-
-  ];
+ 
+  projectService = inject(RepositoryService);
+  authService = inject(AuthService);
 
   label = 'Project';
 
+
   ngOnInit(){
-    this.projectService.setValue(this.projects);
+    this.projectService.getAll();
   }
 
 }
