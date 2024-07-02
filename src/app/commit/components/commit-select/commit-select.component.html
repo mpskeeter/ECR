@@ -1,0 +1,5 @@
+<app-select 
+    [items]="service.items$ | async" 
+    [label]="label"
+    (value)="authService.setCommit($event)"
+></app-select>

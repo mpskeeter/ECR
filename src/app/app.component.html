@@ -227,12 +227,15 @@
       </svg>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
-      <app-project-select></app-project-select>
-      <app-release-select></app-release-select>
+      <app-project-select ></app-project-select>
+      <app-release-select ></app-release-select>
+      <app-commit-select  />
+      <app-branch-select />
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
-      <div class="pill-group">
+      <app-commit-table />
+      <!-- <div class="pill-group">
         @for (item of [
           { title: 'Explore the Docs', link: 'https://angular.dev' },
           { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
@@ -321,7 +324,7 @@
             />
           </svg>
         </a>
-      </div>
+      </div> -->
     </div>
   </div>
 </main>

@@ -1,9 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter,Input, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {BaseEntity} from '../interfaces/base-entity';
+import {BaseEntity} from '../../interfaces/base-entity';
+
 
 /**
  * @title Basic select
@@ -19,6 +20,8 @@ import {BaseEntity} from '../interfaces/base-entity';
 export class SelectComponent {
 
   @Input() items:BaseEntity[] | null = [];
-  @Input() label:String = '';
+  @Input() label:string='';
+  @Input() initial:string='';
+  @Output() value:EventEmitter<string> = new EventEmitter();
 
 }
