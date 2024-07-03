@@ -14,4 +14,5 @@ import { ScrollableComponent,TableComponent } from '../../../core';
 export class CommitTableComponent {
   columnDef=GithubCommitTableDef;
   service=inject(CommitService);
+  selected:string[]=[];
 }
