@@ -3,6 +3,6 @@
 // export const environment: Environment = {
 export const environment = {
 
-    github_api: import.meta.env["ng_app_GITHUB_TOKEN"],
+    github_api: import.meta.env["NG_APP_GITHUB_TOKEN"],
     
 };
