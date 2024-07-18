@@ -4,6 +4,9 @@ import { BranchSelectComponent } from '../../branch/components/branch-select/bra
 import { ReleaseSelectComponent } from '../../release/components/release-select/release-select.component';
 import { CommitSelectComponent } from '../../commit/components/commit-select/commit-select.component';
 import { CommitTableComponent } from '../../commit/components/commit-table/commit-table.component';
+import { ResponseBoxComponent } from '../../core/components/response-box';
+import { TextBoxComponent } from '../../core/components/text-box';
+import { DateTimeComponent } from '../../core/components/date-time';
 
 @Component({
   selector: 'app-selector',
@@ -14,6 +17,10 @@ import { CommitTableComponent } from '../../commit/components/commit-table/commi
     ReleaseSelectComponent,
     CommitSelectComponent,
     CommitTableComponent,
+    ResponseBoxComponent,
+    TextBoxComponent,
+    DateTimeComponent,
+    
   ],
   templateUrl: './selector.component.html',
   styleUrl: './selector.component.scss'
