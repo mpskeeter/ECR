@@ -8,6 +8,8 @@ import { BranchSelectComponent } from './branch/components/branch-select/branch-
 import { CommitTableComponent } from './commit/components/commit-table/commit-table.component';
 import { DashboardPageComponent } from "./dashboard-page/dashboard-page.component";
 import { SidenavComponent } from "./dashboard/components/sidenav/sidenav.component";
+import { ResponseBoxComponent } from './core/components/response-box';
+import { DateTimeComponent } from './core/components/date-time';
 
 
 @Component({
@@ -23,7 +25,9 @@ import { SidenavComponent } from "./dashboard/components/sidenav/sidenav.compone
         BranchSelectComponent,
         CommitTableComponent,
         DashboardPageComponent,
-        SidenavComponent
+        SidenavComponent,
+        ResponseBoxComponent,
+        DateTimeComponent
     ]
 })
 export class AppComponent {

@@ -62,12 +62,15 @@
                     <a mat-list-item routerLink="#">Struts</a>
                 </mat-nav-list>
             </mat-expansion-panel>
-        </mat-nav-list> -->
         <div style="width: 100%">
             <app-project-select/>
             <app-branch-select/>
             <app-commit-select/>
         </div>
+            <mat-list-item routerLink="/ecr">
+                <mat-icon>apps</mat-icon><span>ECR</span>
+            </mat-list-item>
+<!--         </mat-nav-list> -->
     </mat-sidenav>
     <mat-sidenav-content>
         <router-outlet>
