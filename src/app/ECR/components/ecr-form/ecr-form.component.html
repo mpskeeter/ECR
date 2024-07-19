@@ -5,16 +5,23 @@
      <!-- <app-response-box></app-response-box> -->
       <div >
         <div >
-            <mat-form-field style="width:100%">
-               <mat-label>Title</mat-label>
-               <input matInput placeholder="Title" formControlName="title" />
-               @if (title?.invalid) {
-                  <mat-error>{{'A title is required'}}</mat-error>
-                }
-             </mat-form-field>
+            <!-- <mat-form-field style="width:100%">
+               <mat-label>Id</mat-label>
+               <input matInput placeholder="Id" formControlName="id" />
+             </mat-form-field> -->
              <!-- <app-response-box label="Title" [item]="ecrForm.controls['title']"></app-response-box> -->
         </div>
         <div >
+          <mat-form-field style="width:100%">
+             <mat-label>Title</mat-label>
+             <input matInput placeholder="Title" formControlName="title" />
+             @if (title?.invalid) {
+                <mat-error>{{'A title is required'}}</mat-error>
+              }
+           </mat-form-field>
+           <!-- <app-response-box label="Title" [item]="ecrForm.controls['title']"></app-response-box> -->
+      </div>
+      <div >
             <mat-form-field style="width:100%">
                 <mat-label>Change Severity</mat-label>
                 <input matInput type="number" min="0" max="5" placeholder="Severity" formControlName="changeSeverity">
@@ -80,3 +87,9 @@
       Save
     </button>
   </div>
+
+
+
+
+
+

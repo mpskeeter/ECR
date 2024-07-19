@@ -1,6 +1,8 @@
 import { FormControl, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ColumnDef } from "../../core/interfaces/column-def";
+import { BaseEntity } from "../../core";
 
-export interface Ecr {
+export interface Ecr extends BaseEntity{
     id:number;
     title:string;
     changeSeverity:string;
@@ -29,10 +31,25 @@ export const ecrData=[
         createdDate:'07/17/2024',
         signature:'',
         documents:'',
-    }
+    },
+    {
+        id:2,
+        title:'ECR2',
+        changeSeverity:'1',
+        changePriority:1,
+        requestNumber:1,
+        requestCode:1,
+        description:'this is a long description',
+        solutionRequirements:'',
+        creator:'Ethan',
+        createdDate:'10/31/2024',
+        signature:'',
+        documents:'',
+    },
 ];
 
 export const ecrForm = (fb:FormBuilder, ecr?:Ecr) => fb.group({
+    // id: new FormControl(ecr?.id || 0),
     title: new FormControl(ecr?.title || '',[Validators.required]),
     changeSeverity: new FormControl(ecr?.changeSeverity || ''),
     changePriority: new FormControl(ecr?.changePriority || 0),
@@ -45,3 +62,31 @@ export const ecrForm = (fb:FormBuilder, ecr?:Ecr) => fb.group({
     signature: new FormControl(ecr?.signature || ''),
     documents: new FormControl(ecr?.documents || ''),
   });
+
+  export const EcrTableDef: ColumnDef[] = [
+    {
+      header: 'ID',
+      column: 'id',
+      data: (row) => (row as Ecr).id,
+    },
+    {
+      header: 'TITLE',
+      column: 'title',
+      data: (row) => (row as Ecr).title,
+    },
+    {
+      header: 'DESCRIPTION',
+      column: 'description',
+      data: (row) => (row as Ecr).description,
+    },
+    {
+      header: 'CREATOR',
+      column: 'creator',
+      data: (row) => (row as Ecr).creator,
+    },
+    {
+      header: 'CREATED DATE',
+      column: 'createdDate',
+      data: (row) => (row as Ecr).createdDate || '',
+    },
+  ]
