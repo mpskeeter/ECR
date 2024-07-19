@@ -7,6 +7,7 @@ import { CommitTableComponent } from '../../commit/components/commit-table/commi
 import { ResponseBoxComponent } from '../../core/components/response-box';
 import { TextBoxComponent } from '../../core/components/text-box';
 import { DateTimeComponent } from '../../core/components/date-time';
+import { EcrTableComponent } from "../../ECR/components/ecr-table/ecr-table.component";
 
 @Component({
   selector: 'app-selector',
@@ -20,8 +21,8 @@ import { DateTimeComponent } from '../../core/components/date-time';
     ResponseBoxComponent,
     TextBoxComponent,
     DateTimeComponent,
-    
-  ],
+    EcrTableComponent
+],
   templateUrl: './selector.component.html',
   styleUrl: './selector.component.scss'
 })

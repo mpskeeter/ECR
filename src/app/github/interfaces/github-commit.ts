@@ -103,7 +103,7 @@ export interface GithubCommit extends BaseEntity{
     {
       header: 'SHA',
       column: 'sha',
-      data: (row: GithubCommit) => row.sha,
+      data: (row) => (row as GithubCommit).sha,
     },
     // {
     //   header: 'NODE',
@@ -123,17 +123,17 @@ export interface GithubCommit extends BaseEntity{
     {
       header: 'COMMIT',
       column: 'commit.message',
-      data: (row: GithubCommit) => row.commit?.message,
+      data: (row) => (row as GithubCommit).commit?.message,
     },
     {
       header: 'AUTHOR',
       column: 'author.login',
-      data: (row: GithubCommit) => row.author?.login || '',
+      data: (row) => (row as GithubCommit).author?.login || '',
     },
     {
       header: 'COMMITTER',
       column: 'committer.login',
-      data: (row: GithubCommit) => row.committer?.login || '',
+      data: (row) => (row as GithubCommit).committer?.login || '',
     },
     // {
     //   header: 'PARENTS',

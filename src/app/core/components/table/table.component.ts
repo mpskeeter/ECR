@@ -8,6 +8,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { JsonPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { TableAction } from '../../interfaces';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-table',
@@ -19,6 +21,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
     JsonPipe,
     MatButtonModule,
     MatSortModule,
+    MatIcon,
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
@@ -30,7 +33,7 @@ export class TableComponent {
   displaySelect=input<boolean>(true);
   allowSort=input<boolean>(true);
   allowPagination=input<boolean>(true);
-
+  actions=input<TableAction[]>([]);
   selected=output<string[]>();
 
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -42,6 +45,9 @@ export class TableComponent {
     ];
     if(this.displaySelect())
       values.unshift('select');
+    if(this.actions().length>0) {
+      values.push('actions');
+    }
     return values;
   });
 
