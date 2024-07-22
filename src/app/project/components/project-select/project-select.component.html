@@ -1,5 +1,5 @@
 <app-select 
-    [items]="projectService.items$ | async" 
+    [items]="projectService.items()" 
     [label]="label" 
     [initial]="authService.repository()" 
     (value)="authService.setRepository($event)"

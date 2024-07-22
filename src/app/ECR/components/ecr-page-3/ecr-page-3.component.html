@@ -1,0 +1,10 @@
+<div class="page-block">
+    <app-ecr-page-header [ecr]="ecr()"></app-ecr-page-header>
+    <div class="double-border">
+        <div>
+                <span class="bold">Description Of Problem: </span>
+        </div>
+        <div style="height:100px">
+                {{ecr()?.description}}
+        </div>
+    </div>

@@ -1,4 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
-
+@font-face{
+    font-family:Roboto;
+    src: url('./assets/Roboto-Regular.ttf') format('truetype');
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// svg {
+//     display: inline-flex; 
+// }
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    // border: 3px solid green;
+}
+
+.underline{
+    border-bottom: 2px solid black;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.double-border{
+    border: 4px double black;
+}

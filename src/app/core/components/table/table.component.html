@@ -1,17 +1,63 @@
-<table mat-table [dataSource]="rows()" class="mat-elevation-z8">
+<!-- <pre>{{ selection | json }}</pre> -->
+<!-- <pre>{{ dataSource | json }}</pre> -->
+@if(displaySelect()) {
+    <section>
+        <!-- <div class="example-button-row"> -->
+          <button mat-raised-button (click)="sendSelected()">Save</button>
+        <!-- </div> -->
+      </section>
+}
+<table mat-table matSort [matSortDisabled]="!allowSort()" [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
-  
+  <!-- Checkbox Column -->
+   @if(displaySelect()){
+       <ng-container matColumnDef="select">
+         <th mat-header-cell *matHeaderCellDef>
+           <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                         [checked]="selection.hasValue() && isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+                         <!-- [aria-label]="checkboxLabel()"> -->
+           </mat-checkbox>
+         </th>
+         <td mat-cell *matCellDef="let row">
+           <mat-checkbox (click)="$event.stopPropagation()"
+                         (change)="$event ? selection.toggle(row) : null"
+                         [checked]="selection.isSelected(row)">
+                         <!-- [aria-label]="checkboxLabel(row)" -->
+           </mat-checkbox>
+         </td>
+       </ng-container>
+   }
     @for(column of columns(); track column) {
         <ng-container [matColumnDef]="column.column">
-            <th mat-header-cell *matHeaderCellDef> {{ column.header }} </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!allowSort()"> {{ column.header }} </th>
             <td mat-cell *matCellDef="let row"> {{column.data(row)}} </td>
         </ng-container>
     }
-    
-    <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+    @if(actions().length>0){
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let row">
+          @for(action of actions(); track action){
+            <button (click)="action.action(row)">
+          <mat-icon aria-hidden="false" [attr.aria-label]="action.label" [fontIcon]="action.icon"></mat-icon>
+            </button>
+          }
+        </td>
+      </ng-container>
+  }
+    <tr mat-header-row *matHeaderRowDef="displayedColumns(); sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns();"></tr>
   </table>
+  @if(allowPagination()) {
+    <mat-paginator 
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements">
+    </mat-paginator>
+  }
+
   
   

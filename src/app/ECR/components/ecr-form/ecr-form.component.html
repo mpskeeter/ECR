@@ -1,0 +1,95 @@
+<!-- <pre>{{ ecrForm.controls['title'] | json }}</pre> -->
+<form [formGroup]="ecrForm">
+    <!-- <label for="title">Title: </label> -->
+    <!-- <input id="title" type="text" formControlName="title"> -->
+     <!-- <app-response-box></app-response-box> -->
+      <div >
+        <div >
+            <!-- <mat-form-field style="width:100%">
+               <mat-label>Id</mat-label>
+               <input matInput placeholder="Id" formControlName="id" />
+             </mat-form-field> -->
+             <!-- <app-response-box label="Title" [item]="ecrForm.controls['title']"></app-response-box> -->
+        </div>
+        <div >
+          <mat-form-field style="width:100%">
+             <mat-label>Title</mat-label>
+             <input matInput placeholder="Title" formControlName="title" />
+             @if (title?.invalid) {
+                <mat-error>{{'A title is required'}}</mat-error>
+              }
+           </mat-form-field>
+           <!-- <app-response-box label="Title" [item]="ecrForm.controls['title']"></app-response-box> -->
+      </div>
+      <div >
+            <mat-form-field style="width:100%">
+                <mat-label>Change Severity</mat-label>
+                <input matInput type="number" min="0" max="5" placeholder="Severity" formControlName="changeSeverity">
+              </mat-form-field>
+              <!-- <app-response-box label="Change Severity" [item]="ecrForm.controls['changeSeverity']"></app-response-box> -->
+        </div>
+        <div >
+            <mat-form-field style="width:100%">
+               <mat-label>Change Priority</mat-label>
+               <input matInput type="number" min="0" max="5" placeholder="Change Priority" formControlName="changePriority">
+             </mat-form-field>
+        </div>
+        <div >
+            <mat-form-field style="width:100%">
+               <mat-label>Request Number</mat-label>
+               <input matInput type="number" min="0" max="5" placeholder="Request Number" formControlName="requestNumber">
+             </mat-form-field>
+        </div>
+        <div >
+            <mat-form-field style="width:100%">
+               <mat-label>Request Code</mat-label>
+               <input matInput type="number" min="0" max="5" placeholder="Request Code" formControlName="requestCode">
+             </mat-form-field>
+        </div>
+        <div >
+            <mat-form-field style="width:100%">
+               <mat-label>Description</mat-label>
+               <textarea matInput placeholder="Description" formControlName="description"></textarea>
+             </mat-form-field>
+        </div>
+        <div >
+            <mat-form-field style="width:100%">
+               <mat-label>Solution Requirements</mat-label>
+               <textarea matInput placeholder="Solution Requirements" formControlName="solutionRequirements"></textarea>
+             </mat-form-field>
+        </div>
+        <div >
+            <mat-form-field style="width:100%">
+               <mat-label>Creator</mat-label>
+               <input matInput placeholder="Creator" formControlName="creator">
+               @if (creator?.invalid) {
+                <mat-error>{{'A creator is required'}}</mat-error>
+              }
+             </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput formControlName="createdDate" [value]="valueCreatedDate" [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker [startAt]="valueCreatedDate"></mat-datepicker>
+              </mat-form-field>
+              
+        </div>
+      </div>
+    <!-- <label for="changeSeverity">Change Severity: </label> -->
+    <!-- <input id="changeSeverity" type="text" formControlName="changeSeverity"> -->
+  </form>
+  <div class="example-button-container">
+    <button mat-fab extended (click)="onClick()"[disabled]="ecrForm.invalid">
+      <mat-icon>favorite</mat-icon>
+      Save
+    </button>
+  </div>
+
+
+
+
+
+

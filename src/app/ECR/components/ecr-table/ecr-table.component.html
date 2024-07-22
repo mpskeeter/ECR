@@ -1,0 +1,10 @@
+<app-scrollable [height]="600">
+    <pre>{{selected}}</pre>
+    <app-table
+        [rows]="(service.items()) || []" 
+        [columns]="columnDef"
+        [displaySelect]="displaySelect"
+        [actions]="actions"
+        (selected)="selected = $event" 
+        />
+</app-scrollable>

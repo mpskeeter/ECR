@@ -6,21 +6,29 @@ import { CommitSelectComponent } from './commit/components/commit-select/commit-
 import { AuthService } from './core/services/auth.service';
 import { BranchSelectComponent } from './branch/components/branch-select/branch-select.component';
 import { CommitTableComponent } from './commit/components/commit-table/commit-table.component';
+import { DashboardPageComponent } from "./dashboard-page/dashboard-page.component";
+import { SidenavComponent } from "./dashboard/components/sidenav/sidenav.component";
+import { ResponseBoxComponent } from './core/components/response-box';
+import { DateTimeComponent } from './core/components/date-time';
 
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet, 
-    ProjectSelectComponent, 
-    ReleaseSelectComponent, 
-    CommitSelectComponent, 
-    BranchSelectComponent, 
-    CommitTableComponent, 
-  ], 
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    imports: [
+        RouterOutlet,
+        ProjectSelectComponent,
+        ReleaseSelectComponent,
+        CommitSelectComponent,
+        BranchSelectComponent,
+        CommitTableComponent,
+        DashboardPageComponent,
+        SidenavComponent,
+        ResponseBoxComponent,
+        DateTimeComponent
+    ]
 })
 export class AppComponent {
   title = 'ecr';

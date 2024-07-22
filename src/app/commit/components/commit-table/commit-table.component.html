@@ -1,3 +1,9 @@
-<app-table
-[rows]="(service.items$ | async) || []" [columns]="columnDef" />
+<app-scrollable [height]="600">
+    <pre>{{selected}}</pre>
+    <app-table
+        [rows]="(service.items()) || []" 
+        [columns]="columnDef"
+        (selected)="selected = $event" 
+        />
+</app-scrollable>
 

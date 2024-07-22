@@ -1,28 +1,38 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { BaseEntity } from '../interfaces/base-entity'
 import { BehaviorSubject, catchError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { BaseState } from '../interfaces';
+import { BaseStateService } from './base-state.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class BaseCrudService<T extends BaseEntity> {
+export class BaseCrudService<T extends BaseEntity> extends BaseStateService<T> {
   http=inject(HttpClient);
   authService=inject(AuthService);
 
-  items = new BehaviorSubject<T[]>([]);
-  items$ = this.items.asObservable();
 
-  setValue = (newValue:T[]) => this.items.next(newValue);
+  // items = new BehaviorSubject<T[]>([]);
+  // items$ = this.items.asObservable();
+
+  // setValue = (newValue:T[]) => this.items.next(newValue);
   baseURL='https://api.github.com';
   endpointType='';
-  constructor() { }
+  constructor() { 
+    super();
+  }
 
   getAll(){
     this.http.get<T[]>(`${this.baseURL}/${this.endpointType}`)
-      .subscribe((data) => this.items.next(data));
+      .subscribe((data) => {
+        this.state.update((state) => ({
+          ...state,
+          items: data,
+        }));
+      });
   }
 
   getForRepository(){
@@ -33,14 +43,20 @@ export class BaseCrudService<T extends BaseEntity> {
          })
       )
       .subscribe({
-        next: (data) => this.items.next(
-        data?.map((item) =>({
-          ...item,
-          name: item.name || item.sha
-        })) || []
-        ),
+        next: (data) => {
+          this.state.update((state) => ({
+            ...state,
+            items: data?.map((item) =>({
+              ...item,
+              name: item.name || item.sha
+            })) || []
+          }));
+        } ,
         error: error => {
-          this.items.next([]);
+          this.state.update((state) => ({
+            ...state,
+            items: []
+          }));
           console.log(error);
         },
    });
