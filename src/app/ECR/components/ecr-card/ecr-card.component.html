@@ -1,0 +1,13 @@
+@for(ecr of service.items(); track ecr){
+    <app-card>
+        <p ngProjectAs="card-title">{{ ecr.title }}</p>
+        <p ngProjectAs="card-body">{{ ecr.description }} </p>
+        <div ngProjectAs="card-actions">
+            @for(action of actions; track action){
+                <button (click)="action.action(ecr)">
+              <mat-icon aria-hidden="false" [attr.aria-label]="action.label" [fontIcon]="action.icon"></mat-icon>
+                </button>
+              }
+        </div>
+    </app-card>
+}

@@ -8,6 +8,7 @@ import { ResponseBoxComponent } from '../../core/components/response-box';
 import { TextBoxComponent } from '../../core/components/text-box';
 import { DateTimeComponent } from '../../core/components/date-time';
 import { EcrTableComponent } from "../../ECR/components/ecr-table/ecr-table.component";
+import { EcrCardComponent } from "../../ECR/components/ecr-card/ecr-card.component";
 
 @Component({
   selector: 'app-selector',
@@ -21,7 +22,8 @@ import { EcrTableComponent } from "../../ECR/components/ecr-table/ecr-table.comp
     ResponseBoxComponent,
     TextBoxComponent,
     DateTimeComponent,
-    EcrTableComponent
+    EcrTableComponent,
+    EcrCardComponent
 ],
   templateUrl: './selector.component.html',
   styleUrl: './selector.component.scss'
