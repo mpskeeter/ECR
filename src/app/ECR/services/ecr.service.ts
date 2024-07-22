@@ -1,27 +1,42 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { Ecr, ecrData } from '../interfaces';
 import { BehaviorSubject } from 'rxjs';
+import { BaseStateService } from '../../core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EcrService {
+export class EcrService extends BaseStateService<Ecr>{
 
   ecrs=signal<Ecr[]>(ecrData);
 
-  items = new BehaviorSubject<Ecr[]>([]);
-  items$ = this.items.asObservable();
-  item = new BehaviorSubject<Ecr>({} as Ecr);
-  item$ = this.item.asObservable();
+  // items = new BehaviorSubject<Ecr[]>([]);
+  // items$ = this.items.asObservable();
+  // item = new BehaviorSubject<Ecr>({} as Ecr);
+  // item$ = this.item.asObservable();
 
-  constructor() { }
+  constructor() { 
+    super();
+    effect(() => {
+      this.state.update((state) => ({
+        ...state,
+        items: this.ecrs(),
+      }));
+    },{allowSignalWrites:true})
+  }
 
   getAll(){
-    this.items.next(this.ecrs());
+    this.state.update((state) => ({
+      ...state,
+      items: this.ecrs(),
+    }));
   }
   getById(id:number){
-    this.item.next(this.ecrs().find((ecr) => ecr.id===id) || {} as Ecr);
-    return this.item$;
+    this.state.update((state) => ({
+      ...state,
+      item: this.ecrs().find((ecr) => ecr.id===id) || {} as Ecr,
+      id
+    }));
   }
   save(ecr:Ecr) {
     if(ecr.id>0)
@@ -47,8 +62,7 @@ export class EcrService {
 
   delete(ecrID:number) {
     this.ecrs.update((ecrs) => ecrs.filter((ecr) => ecr.id !== ecrID));
-    console.log('ecrservice:delete:', ecrID);
-    this.items.next(this.ecrs());
+    // this.items.next(this.ecrs());
   }
 
 }

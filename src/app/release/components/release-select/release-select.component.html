@@ -1,5 +1,5 @@
 <app-select 
-    [items]="releaseService.items$ | async" 
+    [items]="releaseService.items()" 
     [label]="label"
     (value)="authService.setRelease($event)"
     ></app-select>

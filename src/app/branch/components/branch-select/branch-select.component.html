@@ -1,5 +1,5 @@
 <app-select 
-    [items]="service.items$ | async" 
+    [items]="service.items()" 
     [label]="label"
     (value)="authService.setBranch($event)"
 ></app-select>

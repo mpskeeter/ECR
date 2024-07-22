@@ -1,13 +1,13 @@
 import { Component, effect, inject } from '@angular/core';
 import { SelectComponent } from '../../../core/components/select/select.component';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { BranchService } from '../../../github/services/branch.service';
 
 @Component({
   selector: 'app-branch-select',
   standalone: true,
-  imports: [SelectComponent, AsyncPipe, JsonPipe],
+  imports: [SelectComponent, JsonPipe],
   templateUrl: './branch-select.component.html',
   styleUrl: './branch-select.component.scss'
 })

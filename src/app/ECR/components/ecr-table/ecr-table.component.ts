@@ -2,13 +2,12 @@ import { Component, inject } from '@angular/core';
 import { EcrTableDef } from '../../interfaces';
 import { EcrService } from '../../services/ecr.service';
 import { TableComponent, ScrollableComponent, TableAction } from "../../../core";
-import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ecr-table',
   standalone: true,
-  imports: [ScrollableComponent, TableComponent, AsyncPipe],
+  imports: [ScrollableComponent, TableComponent],
   templateUrl: './ecr-table.component.html',
   styleUrl: './ecr-table.component.scss'
 })
@@ -28,7 +27,12 @@ export class EcrTableComponent {
     {
       label:'Delete',
       icon:'delete',
-      action: (row) => { console.log('deleting row:', row.id); this.service.delete(row?.id as number); }
+      action: (row) => this.service.delete(row?.id as number)
+    },
+    {
+      label:'Print',
+      icon:'print',
+      action: (row) => this.router.navigate(['ecr-doc', row.id])
     }
   ];
 
