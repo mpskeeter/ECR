@@ -82,7 +82,7 @@
     <!-- <input id="changeSeverity" type="text" formControlName="changeSeverity"> -->
   </form>
   <div class="example-button-container">
-    <button mat-fab extended (click)="onClick()">
+    <button mat-fab extended (click)="onClick()"[disabled]="ecrForm.invalid">
       <mat-icon>favorite</mat-icon>
       Save
     </button>

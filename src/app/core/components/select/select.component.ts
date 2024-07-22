@@ -19,7 +19,7 @@ import {BaseEntity} from '../../interfaces/base-entity';
 })
 export class SelectComponent {
 
-  @Input() items:BaseEntity[] | null = [];
+  @Input() items:BaseEntity[] | undefined = [];
   @Input() label:string='';
   @Input() initial:string='';
   @Output() value:EventEmitter<string> = new EventEmitter();

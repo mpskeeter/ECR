@@ -1,7 +1,7 @@
 <app-scrollable [height]="600">
     <pre>{{selected}}</pre>
     <app-table
-        [rows]="(service.items$ | async) || []" 
+        [rows]="(service.items()) || []" 
         [columns]="columnDef"
         [displaySelect]="displaySelect"
         [actions]="actions"

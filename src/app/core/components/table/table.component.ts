@@ -104,8 +104,6 @@ export class TableComponent {
   }
 
   sendSelected(){
-    const temp =this.selection.selected.map((item) => item.name || '');
-    console.log(temp);
     this.selected.emit(this.selection.selected.map((item) => item.name || ''));
   }
 

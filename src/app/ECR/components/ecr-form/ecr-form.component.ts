@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, effect, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Ecr, ecrData, ecrForm } from '../../interfaces';
 import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ResponseBoxComponent } from "../../../core/components/response-box/response-box.component";
@@ -10,7 +10,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { EcrService } from '../../services/ecr.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
+import { map, Observable, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-ecr-form',
@@ -27,44 +27,31 @@ import { Observable, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
     ],
     providers: [provideNativeDateAdapter()],
 })
-export class EcrFormComponent implements OnInit, OnDestroy{
+export class EcrFormComponent implements OnInit{
   fb=inject(FormBuilder);
-  //ecr=ecrData[0];
-  ecr$:Observable<Ecr> = new Observable();
-  ecrId:number = 0;
-  //ecrForm=ecrForm(this.fb,this.ecr);
-  ecrForm!: FormGroup<{ title: FormControl<string | null>; changeSeverity: FormControl<string | null>; changePriority: FormControl<number | null>; requestNumber: FormControl<number | null>; requestCode: FormControl<number | null>; description: FormControl<string | null>; solutionRequirements: FormControl<string | null>; creator: FormControl<string | null>; createdDate: FormControl<Date | null>; signature: FormControl<string | null>; documents: FormControl<string | null>; }>;
-  valueCreatedDate = new Date();
   service=inject(EcrService);
   route=inject(ActivatedRoute);
   router=inject(Router);
-  sub$=new Subject();
 
-  ngOnInit() {
-    this.ecr$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        this.ecrId = Number(params.get('id'));
-        return this.service.getById(this.ecrId);
-      })
-    );
+  ecrId:number = 0;
+  ecrForm=ecrForm(this.fb,this.service.item());
+  valueCreatedDate = new Date();
 
-
-    this.ecr$
-      .pipe(
-        takeUntil(this.sub$)
-      )
-      .subscribe({
-        next: (ecr) => {
-          this.ecrForm = ecrForm(this.fb,ecr); 
-          this.valueCreatedDate = new Date(ecr.createdDate);
-        },
-        error: (error) => console.log(error),
-      })
+  constructor() {
+    effect(() => this.ecrForm=ecrForm(this.fb,this.service.item()));
+    // effect(() => console.log(this.service.state()))
   }
 
-  ngOnDestroy() {
-    this.sub$.next(1);
-    this.sub$.complete();
+  ngOnInit() {
+    this.route.paramMap.pipe(
+      map(params => {
+        this.ecrId = Number(params.get('id'));
+        this.service.getById(this.ecrId);
+        // this.ecrForm=ecrForm(this.fb,this.service.item());
+
+      })
+    )
+    .subscribe();
   }
 
   get id() {
@@ -106,13 +93,11 @@ export class EcrFormComponent implements OnInit, OnDestroy{
 
   onClick(){
     let ecr=this.ecrForm.value as unknown as Ecr;
-    ecr={...ecr,id:this.ecrId}
-    console.log(ecr)
+    ecr={
+      ...ecr,
+      id:this.ecrId,
+    };
     this.service.save(ecr);
     this.router.navigate(['selector']);
-    // console.log(this.ecrForm.value)
   }
-
-
-
 }
