@@ -31,6 +31,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-weight: bold;
 }
 
+.border{
+    border: 2px solid black;
+}
+
+.left-align {
+    width: 30%;
+    // float: left;
+}
+
+.right-align{
+    width: 70%;
+    float: right;
+}
+
 .double-border{
-    border: 4px double black;
+    border: 2px double black;
 }
