@@ -1,0 +1,10 @@
+<button mat-fab extended [attr.aria-label]="ariaLabel()" (click)="click.emit(true)">
+    <span style="display: flex; align-items: center;">
+    @if (icon()) {
+        <app-icon [icon]="icon()"></app-icon>
+    }
+    @if (text() !== null) {
+        <span [style.padding-left]="icon() ? '7px' : '0px'">{{ text() }}</span>
+    }
+    </span>
+  </button>
