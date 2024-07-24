@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { TableAction } from '../../interfaces';
 import { MatIcon } from '@angular/material/icon';
+import { ButtonComponent } from '../button';
+import { IconComponent } from "../icon/icon.component";
 
 @Component({
   selector: 'app-table',
@@ -22,7 +24,9 @@ import { MatIcon } from '@angular/material/icon';
     MatButtonModule,
     MatSortModule,
     MatIcon,
-  ],
+    ButtonComponent,
+    IconComponent
+],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })

@@ -1,14 +1,12 @@
 <!-- <pre>{{ selection | json }}</pre> -->
 <!-- <pre>{{ dataSource | json }}</pre> -->
 @if(displaySelect()) {
-    <section>
-        <!-- <div class="example-button-row"> -->
-          <button mat-raised-button (click)="sendSelected()">Save</button>
-        <!-- </div> -->
-      </section>
+          <div style="padding-bottom: 15px; flex-direction: row; justify-content: flex-start; width: 100%; display: flex;">
+            <app-button text="Select" (click)="sendSelected()"></app-button>   
+        </div>
 }
+<div>
 <table mat-table matSort [matSortDisabled]="!allowSort()" [dataSource]="dataSource" class="mat-elevation-z8">
-
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   <!-- Checkbox Column -->
@@ -41,9 +39,7 @@
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let row">
           @for(action of actions(); track action){
-            <button (click)="action.action(row)">
-          <mat-icon aria-hidden="false" [attr.aria-label]="action.label" [fontIcon]="action.icon"></mat-icon>
-            </button>
+            <app-icon [toolTip]="action.label" [icon]="action.icon" (click)="action.action(row)"></app-icon>
           }
         </td>
       </ng-container>
@@ -58,6 +54,6 @@
       aria-label="Select page of periodic elements">
     </mat-paginator>
   }
-
+</div>
   
   
