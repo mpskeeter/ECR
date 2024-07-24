@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EcrPage2Component } from './ecr-page-2.component';
+import { EcrPageBlockComponent } from './ecr-page-block.component';
 
-describe('EcrPage2Component', () => {
-  let component: EcrPage2Component;
-  let fixture: ComponentFixture<EcrPage2Component>;
+describe('EcrPageBlockComponent', () => {
+  let component: EcrPageBlockComponent;
+  let fixture: ComponentFixture<EcrPageBlockComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EcrPage2Component]
+      imports: [EcrPageBlockComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EcrPage2Component);
+    fixture = TestBed.createComponent(EcrPageBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,21 @@
+<div >
+    <div >
+        <div class="border" 
+             [style]="{'margin-bottom': '1px'}"
+             [style.background-color]="labelBackgroundColor()">
+            <span class="bold" [ngClass]="{'center':labelCenter()}">{{ label() }} </span>
+        </div>
+        <div
+            class="border" 
+            [style]="{'margin-bottom': '1px'}"
+            [style.background-color]="contentBackgroundColor()" 
+            [ngStyle]="{'min-height': height() + 'px', 'height': 'auto'}">
+            @if (content()) {
+                {{content()}}
+            }
+            @else {
+                <ng-content></ng-content>
+            }
+        </div>
+    </div>
+</div>

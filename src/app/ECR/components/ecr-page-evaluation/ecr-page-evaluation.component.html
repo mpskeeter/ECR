@@ -1,0 +1,33 @@
+<div class="page-block">
+    <app-ecr-page-header [title]="title" [ecr]="ecr()"></app-ecr-page-header>
+    <app-ecr-page-block
+        [labelCenter]="true" label="Evaluation Sheet"
+        [height]=1200>
+        @for(issue of issues; track issue){
+        <div>
+            <!-- <div style="flex-direction: column; align-items: start"
+                style="width: 100%"> -->
+
+            <div style="display: flex">
+                <div class="border" style="flex-direction: column; align-items: start; width: 33%">
+                    <span class="bold left-align">Name:</span>
+                    <span class="right-align"></span>
+                </div>
+        
+                <div class="border" style="flex-direction: column; align-items: start; width: 33%">
+                    <span class="bold left-align">Date Opened:</span>
+                    <span class="right-align"></span>
+                </div>
+                <div class="border" style="flex-direction: column; align-items: start; width: 33%">
+                    <span class="bold left-align">Date Closed:</span>
+                    <span class="right-align"></span>
+                </div>
+            </div>
+            <app-ecr-page-block><div class="bold">Issue {{issue}}</div></app-ecr-page-block>
+            <app-ecr-page-block><div class="bold">Resolution</div></app-ecr-page-block>
+        </div>
+    }
+    <app-ecr-page-block [height]=250><div class="bold">Resolution Summary</div></app-ecr-page-block>
+        </app-ecr-page-block>
+        
+    </div>

@@ -1,0 +1,1 @@
+export * from './ecr-page-block.component';

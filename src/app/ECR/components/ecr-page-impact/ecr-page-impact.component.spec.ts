@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EcrPage4Component } from './ecr-page-4.component';
+import { EcrPageImpactComponent } from './ecr-page-impact.component';
 
-describe('EcrPage4Component', () => {
-  let component: EcrPage4Component;
-  let fixture: ComponentFixture<EcrPage4Component>;
+describe('EcrPage2Component', () => {
+  let component: EcrPageImpactComponent;
+  let fixture: ComponentFixture<EcrPage2Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EcrPage4Component]
+      imports: [EcrPageImpactComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EcrPage4Component);
+    fixture = TestBed.createComponent(EcrPageImpactComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

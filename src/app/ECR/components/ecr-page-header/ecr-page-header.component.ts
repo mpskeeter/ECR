@@ -12,4 +12,5 @@ import { Ecr } from '../../interfaces';
 export class EcrPageHeaderComponent {
   ecr=input<Ecr | undefined>({} as Ecr);
   displayLogo=input<boolean>(true);
+  title=input<string | null>(null);
 }
