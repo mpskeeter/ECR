@@ -21,6 +21,8 @@
                                 </tr>
                         </thead>
                         <tbody>
+                                @for (sha of ecr()?.commits; track sha) {
+                                        @let files=getCommitDetails(sha);
                                 <tr>
                                         <td>#</td>
                                         <td>Item Number</td>
@@ -29,7 +31,8 @@
                                         <td>Notes</td>
                                         <td>Associated Documents</td>
                                 </tr>
-                                <tr></tr>
+                                }
+                        <tr></tr>
                         </tbody>
                 </table>
 

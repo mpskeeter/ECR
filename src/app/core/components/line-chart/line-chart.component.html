@@ -1,0 +1,49 @@
+<div class='border-2'>
+  <!-- <pre>{{xTicks(0) | json}}</pre> -->
+  <div>{{title()}}</div>
+  @if(displayTooltip()) {
+    <div #tooltip></div>
+  }
+  <figure id='line'>
+    <svg [attr.width]="width()" [attr.height]="height()">
+      <g [attr.transform]="'translate(' + margin().left + ',' + margin().top + ')'">
+        @if(data().length >= 1)
+        {
+          @if(displayTooltip()) {
+            <circle r="5" [attr.fill]="color()" opacity="0.7" style="stroke: white; pointer-events: none;" [attr.cx]="circlePosition().x" [attr.cy]="circlePosition().y"></circle>
+            <rect #mouse [attr.width]="chartWidth()" [attr.height]="chartHeight()" style="fill: none; pointer-events: all; z-index: 1;"></rect>
+            <!-- <g 
+              #tooltip 
+              > -->
+              <!-- style="visibility: hidden; position: relative"  -->
+              <!-- [attr.transform]="'translate(' + this.margin().left + ',' + this.margin().top + ')'" 
+              [attr.transform]="'translate(' + circlePosition().y + ',' + circlePosition().x + ')'" -->
+              <!-- <rect width="7em" height="2.5em"  
+                      x="-7em" y="-2.5em"/> -->
+              <!-- <text x="-3.5em" y="-2.5em" text-anchor="middle">
+                <tspan #tooltipDate dy="1em">Mouse-tracking</tspan>
+                <tspan #tooltipValue x="-3.5em" dy="1.25em">SVG Tip</tspan>
+              </text> -->
+            <!-- </g> -->
+          }
+          <g #xAxis [attr.transform]="'translate(0,' + this.chartHeight() + ')'" fill="none" [attr.font-size]="fontSize()" font-family="sans-serif" text-anchor="middle" [ngStyle]="{'font-size': fontSize()+'px'}"></g>
+          <g #yAxis fill="none" [attr.font-size]="fontSize()" font-family="sans-serif" text-anchor="end" [ngStyle]="{'font-size': fontSize()+'px'}"></g>
+          <!-- xGrid lines -->
+          <g #xGrid>
+          @for(i of xTicks(0); track i) {
+            <line [attr.x1]="x()(i)" [attr.x2]="x()(i)" [attr.y1]="0" [attr.y2]="chartHeight()" stroke="#e0e0e0" stroke-width="0.5"></line>
+          }
+          </g>
+          <!-- yGrid lines -->
+          <g #yGrid>
+          @for(j of yTicks(0); track j) {
+            <line [attr.x1]="0" [attr.x2]="chartWidth()" [attr.y1]="y()(j)" [attr.y2]="y()(j)" stroke="#e0e0e0" stroke-width="0.5"></line>
+          }
+          </g>
+          <!-- data -->
+          <g #lineData></g>
+        }
+      </g>
+    </svg>
+  </figure>
+</div>
