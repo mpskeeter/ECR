@@ -14,6 +14,7 @@ export interface GithubCommit extends BaseEntity{
     parents: Parent[];
     stats?: GithubStats;
     files?: GithubFile[];
+    message?: string;
   }
   
   interface Commit2 {

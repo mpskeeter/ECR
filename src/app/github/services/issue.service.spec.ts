@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CommitDetailsService } from './commit-details.service';
+import { IssueService } from './issue.service';
 
-describe('CommitDetailsService', () => {
-  let service: CommitDetailsService;
+describe('IssueService', () => {
+  let service: IssueService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CommitDetailsService);
+    service = TestBed.inject(IssueService);
   });
 
   it('should be created', () => {
