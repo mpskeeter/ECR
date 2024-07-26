@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { ProjectSelectComponent } from '../../project/components/project-select/project-select.component';
 import { BranchSelectComponent } from '../../branch/components/branch-select/branch-select.component';
 import { ReleaseSelectComponent } from '../../release/components/release-select/release-select.component';
@@ -9,6 +9,8 @@ import { TextBoxComponent } from '../../core/components/text-box';
 import { DateTimeComponent } from '../../core/components/date-time';
 import { EcrTableComponent } from "../../ECR/components/ecr-table/ecr-table.component";
 import { EcrCardComponent } from "../../ECR/components/ecr-card/ecr-card.component";
+import { CommitService, IssueService } from '../../github';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-selector',
@@ -23,11 +25,19 @@ import { EcrCardComponent } from "../../ECR/components/ecr-card/ecr-card.compone
     TextBoxComponent,
     DateTimeComponent,
     EcrTableComponent,
-    EcrCardComponent
+    EcrCardComponent,
+    JsonPipe
 ],
+providers:[IssueService,],
   templateUrl: './selector.component.html',
   styleUrl: './selector.component.scss'
 })
 export class SelectorComponent {
+  issueService=inject(IssueService);
+  commitService=inject(CommitService);
 
+  eff= effect(() =>{
+    this.issueService.getForRepository()
+    this.commitService.getForRepository()
+  });
 }
