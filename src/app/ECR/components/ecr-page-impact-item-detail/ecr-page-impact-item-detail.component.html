@@ -1,0 +1,16 @@
+<!-- <pre>{{sha()}}</pre> -->
+<pre>{{service.item() | json}}</pre>
+
+@for(file of service.item()?.files; track file; let idx = $index, last=$last) {
+    <tr style="vertical-align: baseline; border: none;"
+        [ngClass]="{'underline': last}">
+        <td>{{$first ? itemNumber() : ''}}</td>
+        <td>{{idx+1}}</td>
+        <td>{{file.filename}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        
+    </tr>
+
+}
