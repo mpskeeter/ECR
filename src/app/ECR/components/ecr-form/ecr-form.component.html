@@ -15,7 +15,7 @@
           <mat-form-field style="width:100%">
              <mat-label>Title</mat-label>
              <input matInput placeholder="Title" formControlName="title" />
-             @if (title?.invalid) {
+             @if (title.invalid) {
                 <mat-error>{{'A title is required'}}</mat-error>
               }
            </mat-form-field>
@@ -62,7 +62,7 @@
             <mat-form-field style="width:100%">
                <mat-label>Creator</mat-label>
                <input matInput placeholder="Creator" formControlName="creator">
-               @if (creator?.invalid) {
+               @if (creator.invalid) {
                 <mat-error>{{'A creator is required'}}</mat-error>
               }
              </mat-form-field>
@@ -78,6 +78,23 @@
               
         </div>
       </div>
+      <div >
+        <mat-form-field style="width:100%">
+           <mat-label>Repository</mat-label>
+           <mat-select formControlName="repository">
+            @for (Item of repositoryService.items(); track Item) {
+              <mat-option [value]="Item?.name">{{Item?.name}}</mat-option>
+            }
+          </mat-select>
+        <!-- <input matInput placeholder="Repository" formControlName="repository"> -->
+           @if (repository?.invalid) {
+            <mat-error>{{'A repository is required'}}</mat-error>
+          }
+         </mat-form-field>
+    </div>
+    <div>
+      <app-commit-table [selected]="commitValues" (selectedChange)="setCommit($event)"></app-commit-table>
+    </div>
     <!-- <label for="changeSeverity">Change Severity: </label> -->
     <!-- <input id="changeSeverity" type="text" formControlName="changeSeverity"> -->
   </form>

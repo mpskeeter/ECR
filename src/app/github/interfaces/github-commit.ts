@@ -1,6 +1,7 @@
 import { BaseEntity } from "../../core";
 import { ColumnDef } from "../../core/interfaces/column-def";
-
+import { GithubFile } from "./github-file";
+import { GithubStats } from "./github-stats";
 export interface GithubCommit extends BaseEntity{
     url: string;
     sha: string;
@@ -11,6 +12,8 @@ export interface GithubCommit extends BaseEntity{
     author: Author2;
     committer: Committer2;
     parents: Parent[];
+    stats?: GithubStats;
+    files?: GithubFile[];
   }
   
   interface Commit2 {
@@ -98,13 +101,19 @@ export interface GithubCommit extends BaseEntity{
     // {
     //   header: 'URL',
     //   column: 'url',
-    //   data: (row: GithubCommit) => row.url,
+    //   data: (row) => (row as GithubCommit).url,
     // },
+    {
+      header: 'Commit Date',
+      column: 'commit.author.date',
+      data: (row) => new Date((row as GithubCommit).commit.author.date),
+    },
     {
       header: 'SHA',
       column: 'sha',
       data: (row) => (row as GithubCommit).sha,
     },
+    
     // {
     //   header: 'NODE',
     //   column: 'node_id',

@@ -1,4 +1,4 @@
-import { Component, computed, effect, input, output, ViewChild } from '@angular/core';
+import { Component, computed, effect, input, model, output, ViewChild } from '@angular/core';
 import { BaseEntity } from '../../interfaces/base-entity';
 import { ColumnDef } from '../../interfaces/column-def';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -38,7 +38,9 @@ export class TableComponent {
   allowSort=input<boolean>(true);
   allowPagination=input<boolean>(true);
   actions=input<TableAction[]>([]);
-  selected=output<string[]>();
+  // selected=model<string[]>(['4be880668e496bfd22fd1b1fdd959d8ffcc85e21','54070e1768bdbc506c68e559e6b8c77bc6cddc33','b19ab97c8a97c51a525def1fa46ba987ef4e26d6']);
+  selected=model<string[]>([]);
+  // selected=input<string[]>([]);
 
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChild(MatPaginator) paginator: MatPaginator | any = {};
@@ -63,10 +65,17 @@ export class TableComponent {
           ? value.toLocaleLowerCase()
           : value;
       }, item);
-  }
+  };
+
+  selectedRows = computed(() => {
+    // console.log('selected:', this.selected());
+    const selectedRows = this.rows()?.filter((row) => this.selected()?.some((name) => name === row.name || ''));
+    // console.log('selectedRows:', selectedRows);
+    return selectedRows;
+  });
 
   dataSource = new MatTableDataSource<BaseEntity>(this.rows());
-  selection = new SelectionModel<BaseEntity>(true, []);
+  selection = new SelectionModel<BaseEntity>(true, this.selectedRows());
 
   getProperty = (obj: any, path: string) => (
     path.split('.').reduce((o, p) => o && o[p], obj)
@@ -78,9 +87,14 @@ export class TableComponent {
     });
 
     effect(() => {
+      // console.log('effect selected()',this.selected());
+      this.selection = new SelectionModel<BaseEntity>(true, this.selectedRows());
+    });
+
+    effect(() => {
       if(this.allowSort()) {
-      this.dataSource.sortingDataAccessor = this.pathDataAccessor;
-      this.dataSource.sort = this.sort;
+        this.dataSource.sortingDataAccessor = this.pathDataAccessor;
+        this.dataSource.sort = this.sort;
       }
     });
 
@@ -108,14 +122,6 @@ export class TableComponent {
   }
 
   sendSelected(){
-    this.selected.emit(this.selection.selected.map((item) => item.name || ''));
+    this.selected.set(this.selection.selected.map((item) => item.name || ''));
   }
-
-  /** The label for the checkbox on the passed row */
-  // checkboxLabel(row?: BaseEntity): string {
-  //   if (!row) {
-  //     return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-  //   }
-  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  // }
 }

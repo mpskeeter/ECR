@@ -1,0 +1,17 @@
+<div class='border-2'>
+  {{title()}}
+  <figure id='bar'>
+    <svg [attr.width]="width() + (margin() * 2)" [attr.height]="height() + (margin() * 2)">
+      <g [attr.transform]="'translate(' + margin() + ',' + margin() + ')'">
+        <g #xAxis [attr.transform]="'translate(0,' + height() + ')'" fill="none" [attr.font-size]="fontSize()" font-family="sans-serif" text-anchor="middle" [ngStyle]="{'font-size': fontSize()+'px'}"></g>
+        <g #yAxis fill="none" font-size="fontSize()" font-family="sans-serif" text-anchor="end"></g>
+        <g #barData>
+        @for(item of data(); track item)
+        {
+          <rect [attr.x]="x()(item.label)" [attr.y]="y()(item.count)" [attr.width]="x().bandwidth()" [attr.height]="height() - y()(item.count)" [attr.fill]="item.color"></rect>
+        }
+        </g>
+      </g>
+    </svg>
+  </figure>
+</div>

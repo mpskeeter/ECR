@@ -6,32 +6,28 @@
         [labelCenter]="true" label="Impacted Items & Products List"
         [height]=1200>
         <app-ecr-page-block 
-                label="Items impacted by possible change (CSCIs)"
-                labelBackgroundColor="#8c8c8c"
-                [height]=550>
-                <table style="width:100%">
-                        <thead>
-                                <tr>
-                                        <th>#</th>
-                                        <th>Item Number</th>
-                                        <th>Item Name</th>
-                                        <th>Phase</th>
-                                        <th>Notes</th>
-                                        <th>Associated Documents</th>
-                                </tr>
-                        </thead>
-                        <tbody>
-                                <tr>
-                                        <td>#</td>
-                                        <td>Item Number</td>
-                                        <td>Item Name</td>
-                                        <td>Phase</td>
-                                        <td>Notes</td>
-                                        <td>Associated Documents</td>
-                                </tr>
-                                <tr></tr>
-                        </tbody>
-                </table>
+            label="Items impacted by possible change (CSCIs)"
+            labelBackgroundColor="#8c8c8c"
+            [height]=550>
+            <table style="width:100%">
+                <thead>
+                    <tr>
+                            <th>#</th>
+                            <th>Item Number</th>
+                            <th>Item Name</th>
+                            <th>Phase</th>
+                            <th>Notes</th>
+                            <th>Associated Documents</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <app-ecr-page-impact-item-detail
+                        *ngFor="let sha of ecr()?.commits; let idx=index"
+                        [itemNumber]="idx+1"
+                        [sha]="sha"/>
+                        <!-- style="display:contents;"/> -->
+                </tbody>
+            </table>
 
         </app-ecr-page-block>
         <app-ecr-page-block 
