@@ -2,7 +2,6 @@ import { Component, effect, inject, input, untracked } from '@angular/core';
 import { EcrPageHeaderComponent } from '../ecr-page-header';
 import { Ecr } from '../../interfaces';
 import { EcrPageBlockComponent } from '../ecr-page-block';
-import { CommitDetailsService, CommitService } from '../../../github';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { AuthService } from '../../../core';
 import { EcrPageImpactItemDetailComponent } from '../ecr-page-impact-item-detail/ecr-page-impact-item-detail.component';
