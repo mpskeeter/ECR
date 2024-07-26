@@ -21,11 +21,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <app-ecr-page-impact-item-detail
+                    <app-ecr-page-impact-item-detail style="display: contents;
+                            border-bottom: 1px solid black;"
                         *ngFor="let sha of ecr()?.commits; let idx=index"
                         [itemNumber]="idx+1"
                         [sha]="sha"/>
-                        <!-- style="display:contents;"/> -->
                 </tbody>
             </table>
 
@@ -46,7 +46,11 @@
                                 </tr>
                         </thead>
                         <tbody>
-
+                            <app-ecr-page-impact-capabilities-detail style="display: contents;
+                            border-bottom: 1px solid black;"
+                            *ngFor="let sha of ecr()?.commits; let idx=index"
+                            [itemNumber]="idx+1"
+                            [sha]="sha"/>
                         </tbody>
                 </table>
 

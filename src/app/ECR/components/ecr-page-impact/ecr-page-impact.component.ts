@@ -6,6 +6,7 @@ import { CommitDetailsService, CommitService } from '../../../github';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { AuthService } from '../../../core';
 import { EcrPageImpactItemDetailComponent } from '../ecr-page-impact-item-detail/ecr-page-impact-item-detail.component';
+import { EcrPageImpactCapabilitiesDetailComponent } from '../ecr-page-impact-capabilities-detail/ecr-page-impact-capabilities-detail.component';
 
 @Component({
   selector: 'app-ecr-page-impact',
@@ -15,6 +16,7 @@ import { EcrPageImpactItemDetailComponent } from '../ecr-page-impact-item-detail
             JsonPipe, 
             EcrPageImpactItemDetailComponent,
             CommonModule,
+            EcrPageImpactCapabilitiesDetailComponent
             ],
   // providers:[CommitService],
   templateUrl: './ecr-page-impact.component.html',
