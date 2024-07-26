@@ -1,0 +1,39 @@
+<div class="page-block">
+    <app-ecr-page-header [ecr]="ecr()" [displayLogo]="false"></app-ecr-page-header>
+    <app-ecr-page-block
+        [labelCenter]="true" label="ECB's Recommendations"
+        [height]=1200>
+        <table style="width:100%">
+                <thead>
+                        <tr>
+                                <th>Evaluators</th>
+                                <th>Recommendation</th>
+                                <th>Reason</th>
+                                <th>Date</th>
+                        </tr>
+                </thead>
+                <tbody></tbody>
+        </table>
+        @for(recommendation of recommendations; track recommendation) {
+                <div>
+                        <app-ecr-page-block [height]="250">
+                        <div>{{recommendation}}</div>
+                        <div>
+                                <span class="align-left">Name:</span>
+                                <span class="align-right">Promote</span>
+                                <span class="align-right">Promote</span>
+                        </div>
+                        <div>
+                                <span class="align-left">Deparment:</span>
+                                <span class="align-right">Defer</span>
+                        </div>
+                        <div>
+                                <span class="align-left">Signature:</span>
+                                <span class="align-right">Close</span>
+                        </div>
+                </app-ecr-page-block>
+                </div>
+                <div style="background-color: darkgrey"></div>
+        }
+        </app-ecr-page-block>
+    </div>

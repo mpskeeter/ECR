@@ -61,4 +61,31 @@ export class BaseCrudService<T extends BaseEntity> extends BaseStateService<T> {
         },
    });
   }
+
+  getById(id:string){
+    this.http.get<T>(`${this.baseURL}/repos/${this.authService.user()}/${this.authService.repository()}/${this.endpointType}/${id}`)
+      .pipe(
+        catchError(error => {
+          throw 'error in source. Details: ' + error.code;
+         })
+      )
+      .subscribe({
+        next: (item) => {
+          this.state.update((state) => ({
+            ...state,
+            item: {
+              ...item,
+              name: item.name || item.sha
+            }
+          }));
+        } ,
+        error: error => {
+          this.state.update((state) => ({
+            ...state,
+            items: []
+          }));
+          console.log(error);
+        },
+   });
+  }
 }

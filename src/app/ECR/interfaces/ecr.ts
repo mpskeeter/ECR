@@ -1,4 +1,4 @@
-import { FormControl, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { ColumnDef } from "../../core/interfaces/column-def";
 import { BaseEntity } from "../../core";
 
@@ -15,6 +15,8 @@ export interface Ecr extends BaseEntity{
     createdDate:string;
     signature:string;
     documents:string;    
+    repository:string;
+    commits:string[];
 }
 
 export const ecrData=[
@@ -31,6 +33,8 @@ export const ecrData=[
         createdDate:'07/17/2024',
         signature:'',
         documents:'',
+        repository:'ECR',
+        commits:['4be880668e496bfd22fd1b1fdd959d8ffcc85e21','54070e1768bdbc506c68e559e6b8c77bc6cddc33','b19ab97c8a97c51a525def1fa46ba987ef4e26d6'],
     },
     {
         id:2,
@@ -45,6 +49,8 @@ export const ecrData=[
         createdDate:'10/31/2024',
         signature:'',
         documents:'',
+        repository:'merge-conf',
+        commits:[],
     },
 ];
 
@@ -61,6 +67,8 @@ export const ecrForm = (fb:FormBuilder, ecr?:Ecr) => fb.group({
     createdDate: new FormControl(new Date(ecr?.createdDate || '')),
     signature: new FormControl(ecr?.signature || ''),
     documents: new FormControl(ecr?.documents || ''),
+    repository: new FormControl(ecr?.repository || '',[Validators.required]),
+    commits: new FormControl(ecr?.commits || []),
   });
 
   export const EcrTableDef: ColumnDef[] = [
@@ -89,4 +97,9 @@ export const ecrForm = (fb:FormBuilder, ecr?:Ecr) => fb.group({
       column: 'createdDate',
       data: (row) => (row as Ecr).createdDate || '',
     },
+    // {
+    //   header: 'COMMITS',
+    //   column: 'commits',
+    //   data: (row) => (row as Ecr).commits?.join(',') || '',
+    // },
   ]

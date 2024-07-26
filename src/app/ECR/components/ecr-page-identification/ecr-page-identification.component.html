@@ -1,0 +1,37 @@
+<div class="page-block">
+    <app-ecr-page-header [title]="title" [ecr]="ecr()"></app-ecr-page-header>
+    <app-ecr-page-block label="Description Of Problem:" 
+                        [content]="ecr()?.description || ''"/>
+    <app-ecr-page-block label="Solution Requirements:" 
+                        [content]="ecr()?.solutionRequirements || ''"/>
+    <div style="display: flex">
+         <div style="flex-direction: column; align-items: start"
+              style="width: 50%">
+             <div class="border">
+                  <span class="bold left-align">Creator:</span>
+                  <span class="right-align">{{ecr()?.creator}}</span>
+             </div>
+     
+             <div class="border">
+                  <span class="bold left-align">Created Date:</span>
+                  <span class="right-align">{{ecr()?.createdDate}}</span>
+             </div>
+         </div>
+         <div style="display: Flex; flex: 1; flex-direction: column; align-items: stretch;"
+              class="border">
+            <span class="bold left-align">Creator Signature:</span>
+            <span class="right-align">{{ecr()?.signature}}</span>
+        </div>
+    </div>
+    <app-ecr-page-block label="Supporting Documents"
+                        [content]="ecr()?.documents || ''"/>
+    <app-ecr-page-block label="Disposition:" 
+                        content=""/>
+    <app-ecr-page-block label="Associated Engineering Change Requirements (ECRs)/Software Change Requests (SCRs) :" 
+                        content="" 
+                        [height]="40"/>
+    <app-ecr-page-block label="ECB Evaluators:" 
+                        content="" 
+                        labelBackgroundColor="#8c8c8c"
+                        contentBackgroundColor="#d9d9d9"/>
+</div>

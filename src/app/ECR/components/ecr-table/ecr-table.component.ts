@@ -3,11 +3,12 @@ import { EcrTableDef } from '../../interfaces';
 import { EcrService } from '../../services/ecr.service';
 import { TableComponent, ScrollableComponent, TableAction } from "../../../core";
 import { Router } from '@angular/router';
+import { ButtonComponent } from "../../../core/components/button/button.component";
 
 @Component({
   selector: 'app-ecr-table',
   standalone: true,
-  imports: [ScrollableComponent, TableComponent],
+  imports: [ScrollableComponent, TableComponent, ButtonComponent],
   templateUrl: './ecr-table.component.html',
   styleUrl: './ecr-table.component.scss'
 })
@@ -35,6 +36,10 @@ export class EcrTableComponent {
       action: (row) => this.router.navigate(['ecr-doc', row.id])
     }
   ];
+
+  createRecord(){
+    this.router.navigate(['ecr-edit',0])
+  }
 
 
   constructor(){

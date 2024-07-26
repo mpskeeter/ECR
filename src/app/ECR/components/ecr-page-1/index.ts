@@ -1,1 +1,0 @@
-export * from './ecr-page-1.component';

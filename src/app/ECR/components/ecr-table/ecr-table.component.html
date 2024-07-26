@@ -1,10 +1,17 @@
-<app-scrollable [height]="600">
-    <pre>{{selected}}</pre>
-    <app-table
+<!-- <div> -->
+    <div style="flex-direction: row; justify-content: flex-end; width: 100%; display: flex;">
+        <app-button icon="add_circle" text="Add" (click)="createRecord()"></app-button>   
+    </div>
+<!-- <div> -->
+    <app-scrollable [height]="600">
+        <pre>{{selected}}</pre>
+        <app-table
         [rows]="(service.items()) || []" 
         [columns]="columnDef"
         [displaySelect]="displaySelect"
         [actions]="actions"
-        (selected)="selected = $event" 
+        [selected]="selected" 
         />
-</app-scrollable>
+    </app-scrollable>
+<!-- </div> -->
+<!-- </div> -->

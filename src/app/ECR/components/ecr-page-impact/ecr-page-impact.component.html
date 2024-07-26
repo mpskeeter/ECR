@@ -1,0 +1,77 @@
+<div class="page-block">
+    <app-ecr-page-header
+        [title]="title"
+        [ecr]="ecr()" />
+    <app-ecr-page-block
+        [labelCenter]="true" label="Impacted Items & Products List"
+        [height]=1200>
+        <app-ecr-page-block 
+            label="Items impacted by possible change (CSCIs)"
+            labelBackgroundColor="#8c8c8c"
+            [height]=550>
+            <table style="width:100%">
+                <thead>
+                    <tr>
+                            <th>#</th>
+                            <th>Item Number</th>
+                            <th>Item Name</th>
+                            <th>Phase</th>
+                            <th>Notes</th>
+                            <th>Associated Documents</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <app-ecr-page-impact-item-detail
+                        *ngFor="let sha of ecr()?.commits; let idx=index"
+                        [itemNumber]="idx+1"
+                        [sha]="sha"/>
+                        <!-- style="display:contents;"/> -->
+                </tbody>
+            </table>
+
+        </app-ecr-page-block>
+        <app-ecr-page-block 
+                label="Capabilities impacted by possible change (List top-level parents(s) of items referenced above in the rows below)"
+                labelBackgroundColor="#8c8c8c"
+                [height]=200>
+                <table style="width:100%">
+                        <thead>
+                                <tr>
+                                        <th>#</th>
+                                        <th>Item Number</th>
+                                        <th>Item Name</th>
+                                        <th>Phase</th>
+                                        <th>Notes</th>
+                                        <th>Associated Documents</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                </table>
+
+        </app-ecr-page-block>
+        <app-ecr-page-block 
+                label="Estimated time to fix by category:"
+                labelBackgroundColor="#8c8c8c"
+                [height]=100>
+                <table style="width:100%">
+                        <thead>
+                                <tr>
+                                        <th>#</th>
+                                        <th>Item Number</th>
+                                        <th>Item Name</th>
+                                        <th>Phase</th>
+                                        <th>Notes</th>
+                                        <th>Associated Documents</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                </table>
+
+        </app-ecr-page-block>
+    </app-ecr-page-block>
+    
+</div>
