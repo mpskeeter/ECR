@@ -12,15 +12,15 @@ jobs:
 steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-
- - name: Adding Node.js
+      
+    - name: Adding Node.js
       uses: actions/setup-node@v2
       with:
         node-version: 22
 
-- name: Install Dependencies
+    - name: Install Dependencies
       run: npm install
-      
+
     - name: Build Angular App
       run: npm run build
 
