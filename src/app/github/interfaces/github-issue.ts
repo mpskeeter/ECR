@@ -24,7 +24,7 @@ export interface GithubIssue {
     active_lock_reason: string;
     comments: number;
     pull_request: GithubPullRequest;
-    closed_at: unknown;
+    closed_at: string | null;
     created_at: string;
     updated_at: string;
     closed_by: GithubUser;

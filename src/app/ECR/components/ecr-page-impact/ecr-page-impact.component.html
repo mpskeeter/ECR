@@ -23,9 +23,9 @@
                 <tbody>
                     <app-ecr-page-impact-item-detail style="display: contents;
                             border-bottom: 1px solid black;"
-                        *ngFor="let sha of ecr()?.commits; let idx=index"
+                        *ngFor="let pr of ecr()?.pullRequest; let idx=index"
                         [itemNumber]="idx+1"
-                        [sha]="sha"/>
+                        [pr]="pr"/>
                 </tbody>
             </table>
 
@@ -48,9 +48,9 @@
                         <tbody>
                             <app-ecr-page-impact-capabilities-detail style="display: contents;
                             border-bottom: 1px solid black;"
-                            *ngFor="let sha of ecr()?.commits; let idx=index"
+                            *ngFor="let pr of ecr()?.pullRequest; let idx=index"
                             [itemNumber]="idx+1"
-                            [sha]="sha"/>
+                            [pr]="pr"/>
                         </tbody>
                 </table>
 

@@ -11,6 +11,7 @@ import { EcrTableComponent } from "../../ECR/components/ecr-table/ecr-table.comp
 import { EcrCardComponent } from "../../ECR/components/ecr-card/ecr-card.component";
 import { CommitService, IssueService } from '../../github';
 import { JsonPipe } from '@angular/common';
+import { PullRequestTableComponent } from '../../pull-request/components/commit-table';
 
 @Component({
   selector: 'app-selector',
@@ -20,7 +21,7 @@ import { JsonPipe } from '@angular/common';
     BranchSelectComponent,
     ReleaseSelectComponent,
     CommitSelectComponent,
-    CommitTableComponent,
+    PullRequestTableComponent,
     ResponseBoxComponent,
     TextBoxComponent,
     DateTimeComponent,
