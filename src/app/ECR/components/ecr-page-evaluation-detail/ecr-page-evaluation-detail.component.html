@@ -1,0 +1,31 @@
+<!-- @for(issue of issueNumber(); track issue; let outerIndex=$index) { -->
+<div>
+    <!-- <pre>{{issueService.item() | json }}</pre> -->
+<div style="display: flex">
+    <div class="border" style="flex-direction: column; align-items: start; width: 33%">
+        <span class="bold left-align">Created By:</span>
+        <span class="right-align">{{issueService.item()?.user?.login}}</span>
+    </div>
+
+    <div class="border" style="flex-direction: column; align-items: start; width: 33%">
+        <span class="bold left-align">Date Opened:</span>
+        <span class="right-align">{{issueService.item()?.created_at | date:'shortDate'}}</span>
+    </div>
+    <div class="border" style="flex-direction: column; align-items: start; width: 33%">
+        <span class="bold left-align">Date Closed:</span>
+        <span class="right-align">{{issueService.item()?.closed_at | date:'shortDate'}}</span>
+    </div>
+</div>
+<app-ecr-page-block>
+    <div class="bold">
+        <!-- Issue {{index()}}: -->
+         Issue #{{index()+1}}
+    </div>
+    <div>
+        <!-- {{issueService.item() | json }} -->
+         {{issueService.item()?.body}}
+    </div>
+</app-ecr-page-block>
+<app-ecr-page-block><div class="bold">Resolution</div></app-ecr-page-block>
+</div>
+

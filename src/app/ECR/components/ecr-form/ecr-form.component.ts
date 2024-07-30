@@ -14,8 +14,9 @@ import { map, Observable, Subject, Subscription, switchMap, takeUntil } from 'rx
 import { CommitTableComponent } from "../../../commit/components/commit-table/commit-table.component";
 import { ProjectSelectComponent } from "../../../project/components/project-select/project-select.component";
 import { MatSelectModule } from '@angular/material/select';
-import { CommitService, RepositoryService } from '../../../github';
+import { PullRequestService, RepositoryService } from '../../../github';
 import { AuthService } from '../../../core';
+import { PullRequestTableComponent } from '../../../pull-request/components/commit-table';
 
 @Component({
     selector: 'app-ecr-form',
@@ -29,7 +30,7 @@ import { AuthService } from '../../../core';
     JsonPipe,
     MatDatepickerModule,
     MatIcon, 
-    CommitTableComponent, 
+    PullRequestTableComponent, 
     ProjectSelectComponent,
     MatSelectModule,
     AsyncPipe,],
@@ -44,13 +45,13 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
   router=inject(Router);
   repositoryService=inject(RepositoryService);
   authService=inject(AuthService);
-  commitService=inject(CommitService);
+  pullRequestService=inject(PullRequestService);
 
   ecrId:number = 0;
   ecrForm=ecrForm(this.fb,this.service.item());
   valueCreatedDate = new Date();
 
-  commitVal = signal<string[]>(this.service.item()?.commits || []);
+  pullRequestVal = signal<string[]>(this.service.item()?.pullRequest || []);
 
   constructor() {
     this.repositoryService.getAll();
@@ -70,7 +71,7 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
     this.repository?.valueChanges.subscribe((value) => {
       // console.log(value);
       this.authService.setRepository(value as string);
-      this.commitService.getForRepository();
+      this.pullRequestService.getForRepository();
     });
     // this.ecrForm.get('creator')?.valueChanges.subscribe((value) => {
     //   console.log(value);
@@ -80,7 +81,7 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.authService.setRepository(this.service.item()?.repository || '');
-    this.commitService.getForRepository();
+    this.pullRequestService.getForRepository();
   }
 
   get id() {
@@ -123,18 +124,18 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
     return this.ecrForm.get('repository');
   }
 
-  get commits() {
-    return this.ecrForm.get('commits') as FormControl;
+  get pullRequest() {
+    return this.ecrForm.get('pullRequest') as FormControl;
   }
 
-  get commitValues(): string[] {
+  get pullRequestValues(): string[] {
     // return (this.ecrForm.value as unknown as Ecr).commits?.map((item) => item.commit) || [];
-    return (this.ecrForm.value as unknown as Ecr).commits || [];
+    return (this.ecrForm.value as unknown as Ecr).pullRequest || [];
     // return (this.ecrForm.value as unknown as Ecr).commits || [];
   }
-  setCommit(values: string[]) {
+  setPullRequest(values: string[]) {
     console.log(values);
-    this.commits.setValue(values);
+    this.pullRequest.setValue(values);
   }
 
   onClick(){

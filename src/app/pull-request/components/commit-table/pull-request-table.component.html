@@ -1,0 +1,8 @@
+<app-scrollable [height]="600">
+    <app-table
+        [rows]="(service.items()) || []" 
+        [columns]="columnDef"
+        [(selected)]="selected" 
+        />
+</app-scrollable>
+

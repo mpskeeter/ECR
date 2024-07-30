@@ -16,7 +16,7 @@ export interface Ecr extends BaseEntity{
     signature:string;
     documents:string;    
     repository:string;
-    commits:string[];
+    pullRequest:string[];
 }
 
 export const ecrData=[
@@ -34,7 +34,7 @@ export const ecrData=[
         signature:'',
         documents:'',
         repository:'ECR',
-        commits:['db5c8ea7d0820193f87c5b985303013bcf07a2ce','bfbef439ec6024c94c1003d26244adc324f81c1a','049e6a9f2a00d0a671b2c0695df95ff15466fd83', '4a317f3a1b888b14c7e3e741ca2c9e22f9b27b9e'],
+        pullRequest:['17','19','20'],
     },
     {
         id:2,
@@ -50,7 +50,7 @@ export const ecrData=[
         signature:'',
         documents:'',
         repository:'merge-conf',
-        commits:[],
+        pullRequest:['7','8','9'],
     },
 ];
 
@@ -68,7 +68,7 @@ export const ecrForm = (fb:FormBuilder, ecr?:Ecr) => fb.group({
     signature: new FormControl(ecr?.signature || ''),
     documents: new FormControl(ecr?.documents || ''),
     repository: new FormControl(ecr?.repository || '',[Validators.required]),
-    commits: new FormControl(ecr?.commits || []),
+    pullRequest: new FormControl(ecr?.pullRequest || []),
   });
 
   export const EcrTableDef: ColumnDef[] = [
@@ -97,6 +97,11 @@ export const ecrForm = (fb:FormBuilder, ecr?:Ecr) => fb.group({
       column: 'createdDate',
       data: (row) => (row as Ecr).createdDate || '',
     },
+    {
+      header: 'PR',
+      column: 'pullRequest',
+      data: (row) => (row as Ecr).pullRequest?.join(',') || '',
+  },
     // {
     //   header: 'COMMITS',
     //   column: 'commits',

@@ -35,6 +35,16 @@ export class BaseCrudService<T extends BaseEntity> extends BaseStateService<T> {
       });
   }
 
+  getAllPullRequest(){
+    this.http.get<T[]>(`${this.baseURL}/${this.endpointType}?state=all`)
+      .subscribe((data) => {
+        this.state.update((state) => ({
+          ...state,
+          items: data,
+        }));
+      });
+  }
+
   getForRepository(){
     this.http.get<T[]>(`${this.baseURL}/repos/${this.authService.user()}/${this.authService.repository()}/${this.endpointType}`)
       .pipe(
@@ -48,7 +58,7 @@ export class BaseCrudService<T extends BaseEntity> extends BaseStateService<T> {
             ...state,
             items: data?.map((item) =>({
               ...item,
-              name: item.name || item.sha
+              name: item.name || item.sha || item.number?.toString()
             })) || []
           }));
         } ,
@@ -63,6 +73,8 @@ export class BaseCrudService<T extends BaseEntity> extends BaseStateService<T> {
   }
 
   getById(id:string){
+    // console.log('getById' , this.endpointType, id);
+    if(id){
     this.http.get<T>(`${this.baseURL}/repos/${this.authService.user()}/${this.authService.repository()}/${this.endpointType}/${id}`)
       .pipe(
         catchError(error => {
@@ -75,7 +87,7 @@ export class BaseCrudService<T extends BaseEntity> extends BaseStateService<T> {
             ...state,
             item: {
               ...item,
-              name: item.name || item.sha
+              name: item.name || item.sha  || item.number?.toString()
             }
           }));
         } ,
@@ -86,6 +98,7 @@ export class BaseCrudService<T extends BaseEntity> extends BaseStateService<T> {
           }));
           console.log(error);
         },
-   });
+      });
+    }
   }
 }
