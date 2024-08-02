@@ -34,7 +34,7 @@ export const ecrData=[
         signature:'',
         documents:'',
         repository:'ECR',
-        pullRequest:['17','19','20'],
+        pullRequest:['17','19','20','23'],
     },
     {
         id:2,

@@ -13,6 +13,7 @@ import { DatePipe, JsonPipe } from '@angular/common';
 })
 export class EcrPageEvaluationDetailComponent {
     issueNumber=input<string>('');
+    prNumber=input<string>('');
     index=input<number>(0);
     issueService=inject(IssueService);
   
