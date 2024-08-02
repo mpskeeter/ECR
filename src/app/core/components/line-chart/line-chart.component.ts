@@ -115,12 +115,12 @@ export class LineChartComponent {
       d3.select(this.gx?.nativeElement)
         .call(
           d3.axisBottom(this.x())
-            .tickValues(this.x().ticks(d3.timeMonth.every(this.xTimeStep()) as d3.TimeInterval)) 
+            .tickValues(this.x().ticks(d3.timeDay.every(this.xTimeStep()) as d3.TimeInterval)) 
             .tickFormat((date) => 
               this.xTimeStep() !== 1
                 ? d3.timeFormat(this.xFormat() as string)(date as Date)
                 : d3.timeYear(date as Date) < date
-                  ? d3.timeFormat('%b')(date as Date)
+                  ? d3.timeFormat('%b %d')(date as Date)
                   : d3.timeFormat('%Y')(date as Date)
             )
         )
