@@ -1,0 +1,6 @@
+
+<canvas (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)"
+(touchstart)="onMouseDown($event)" #signPad [width]="signatureWidth()" [height]="signatureHeight()">
+</canvas>
+<button (click)="clearSignature()">Clear</button>
+<!-- <button (click)="saveSignature()">Save</button> -->

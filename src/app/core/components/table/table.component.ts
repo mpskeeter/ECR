@@ -72,15 +72,10 @@ export class TableComponent {
     let selectedRows;
     const row= this.rows()[0];
     if(row?.hasOwnProperty('name') && row?.name) {
-      console.log('checking string');
       selectedRows = this.rows()?.filter((row) => this.selected()?.some((name) => name === row.name || ''));
     } else {
-      console.log('checking number');
-      console.log('selected:', this.selected());
-      console.log('rows:', this.rows());
       selectedRows = this.rows()?.filter((row) => this.selected()?.some((id) => (id as number) === row.id));
     }
-    console.log('selectedRows:', selectedRows);
     return selectedRows;
   });
 

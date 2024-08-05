@@ -41,7 +41,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .right-align{
-    width: 70%;
+    width: var(--rightAlign,70%);
     float: right;
 }
 

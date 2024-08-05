@@ -1,4 +1,8 @@
-<app-ecr-page-identification [ecr]="service.item()"></app-ecr-page-identification>
+<app-ecr-page-identification 
+    [ecr]="service.item()"
+    [signatureHeight]="service.signatureHeight()"
+    [signaureWidth]="service.signatureWidth()"
+></app-ecr-page-identification>
 <app-ecr-page-impact [ecr]="service.item()"> </app-ecr-page-impact>
 <app-ecr-page-evaluation [ecr]="service.item()"></app-ecr-page-evaluation>
 <app-ecr-page-recommendation [ecr]="service.item()"></app-ecr-page-recommendation>

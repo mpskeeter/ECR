@@ -1,6 +1,6 @@
 <app-scrollable [height]="600">
     <app-table
-        [rows]="(service.items()) || []" 
+        [rows]="prListAvailable() || []" 
         [columns]="columnDef"
         [(selected)]="selected" 
         />

@@ -12,7 +12,7 @@
              <!-- <app-response-box label="Title" [item]="ecrForm.controls['title']"></app-response-box> -->
         </div>
         <div >
-          <mat-form-field style="width:100%">
+          <mat-form-field style="width:50%">
              <mat-label>Title</mat-label>
              <input matInput placeholder="Title" formControlName="title" />
              @if (title.invalid) {
@@ -21,53 +21,62 @@
            </mat-form-field>
            <!-- <app-response-box label="Title" [item]="ecrForm.controls['title']"></app-response-box> -->
       </div>
-      <div >
-            <mat-form-field style="width:100%">
+      <div style="display:flex; justify-content: space-between;">
+            <mat-form-field style="width:20%">
                 <mat-label>Change Severity</mat-label>
-                <input matInput type="number" min="0" max="5" placeholder="Severity" formControlName="changeSeverity">
+                <input matInput type="number" min="1" max="3" placeholder="Severity" formControlName="changeSeverity">
               </mat-form-field>
               <!-- <app-response-box label="Change Severity" [item]="ecrForm.controls['changeSeverity']"></app-response-box> -->
-        </div>
-        <div >
-            <mat-form-field style="width:100%">
+        <!-- </div> -->
+        <!-- <div > -->
+            <mat-form-field style="width:20%">
                <mat-label>Change Priority</mat-label>
-               <input matInput type="number" min="0" max="5" placeholder="Change Priority" formControlName="changePriority">
+               <input matInput type="number" min="1" max="3" placeholder="Change Priority" formControlName="changePriority">
              </mat-form-field>
-        </div>
-        <div >
-            <mat-form-field style="width:100%">
+        <!-- </div>
+        <div > -->
+            <mat-form-field style="width:20%">
                <mat-label>Request Number</mat-label>
                <input matInput type="number" min="0" max="5" placeholder="Request Number" formControlName="requestNumber">
              </mat-form-field>
-        </div>
-        <div >
-            <mat-form-field style="width:100%">
-               <mat-label>Request Code</mat-label>
-               <input matInput type="number" min="0" max="5" placeholder="Request Code" formControlName="requestCode">
-             </mat-form-field>
+        <!-- </div>
+        <div > -->
+            <!-- <mat-form-field style="width:20%"> -->
+               <!-- <mat-label>Request Code</mat-label> -->
+               <!-- <input matInput type="number" min="0" max="5" placeholder="Request Code" formControlName="requestCode"> -->
+                <!-- <app-multi-select [data]="service.requestCode() || []"></app-multi-select> -->
+             <!-- </mat-form-field> -->
+             <mat-form-field>
+              <mat-label>Request Code</mat-label>
+              <mat-select [formControl]="requestCode" multiple>
+                @for (item of service.requestCode(); track item) {
+                  <mat-option [value]="item.id">{{item.label}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
         </div>
         <div >
             <mat-form-field style="width:100%">
                <mat-label>Description</mat-label>
-               <textarea matInput placeholder="Description" formControlName="description"></textarea>
+               <textarea matInput placeholder="Description" rows="4" formControlName="description"></textarea>
              </mat-form-field>
         </div>
         <div >
             <mat-form-field style="width:100%">
                <mat-label>Solution Requirements</mat-label>
-               <textarea matInput placeholder="Solution Requirements" formControlName="solutionRequirements"></textarea>
+               <textarea matInput placeholder="Solution Requirements" rows="4" formControlName="solutionRequirements"></textarea>
              </mat-form-field>
         </div>
-        <div >
-            <mat-form-field style="width:100%">
+        <div style="display:flex; justify-content: space-between;">
+            <mat-form-field style="width:30%">
                <mat-label>Creator</mat-label>
                <input matInput placeholder="Creator" formControlName="creator">
                @if (creator.invalid) {
                 <mat-error>{{'A creator is required'}}</mat-error>
               }
              </mat-form-field>
-        </div>
-        <div>
+        <!-- </div>
+        <div> -->
             <mat-form-field>
                 <mat-label>Choose a date</mat-label>
                 <input matInput formControlName="createdDate" [value]="valueCreatedDate" [matDatepicker]="picker">
@@ -79,7 +88,7 @@
         </div>
       </div>
       <div >
-        <mat-form-field style="width:100%">
+        <mat-form-field style="width:20%">
            <mat-label>Repository</mat-label>
            <mat-select formControlName="repository">
             @for (Item of repositoryService.items(); track Item) {
@@ -93,11 +102,19 @@
          </mat-form-field>
     </div>
     <div>
-      <app-pull-request-table [selected]="pullRequestValues" (selectedChange)="setPullRequest($event)"></app-pull-request-table>
+      <app-pull-request-table [ecrId]="ecrId" [selected]="pullRequestValues" (selectedChange)="setPullRequest($event)"></app-pull-request-table>
     </div>
     <!-- <label for="changeSeverity">Change Severity: </label> -->
     <!-- <input id="changeSeverity" type="text" formControlName="changeSeverity"> -->
+     <div style="padding-bottom: 1rem;">
+     <app-signature-pad 
+      [(signatureImg)]="signature" 
+      [signatureHeight]="service.signatureHeight()" 
+      [signatureWidth]="service.signatureWidth()">
+    </app-signature-pad>
+    </div>
   </form>
+
   <div class="example-button-container">
     <button mat-fab extended (click)="onClick()"[disabled]="ecrForm.invalid">
       <mat-icon>favorite</mat-icon>

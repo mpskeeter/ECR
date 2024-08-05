@@ -13,4 +13,6 @@ import { EcrPageBlockComponent } from '../ecr-page-block';
 export class EcrPageRecommendationComponent {
   ecr=input<Ecr | undefined>({} as Ecr);
   recommendations=[1,2,3,4]
+
+  underline=[...new Array(40)]
 }

@@ -2,7 +2,7 @@
 <!-- <pre>{{service.item() | json}}</pre> -->
 
 @for(file of service.item()?.files; track file; let idx = $index, last=$last) {
-    <tr style="vertical-align: baseline; border: none;"
+    <tr style="vertical-align: baseline;"
         [ngClass]="{'underline': last}">
         <td>{{$first ? itemNumber() : ''}}</td>
         <td>{{idx+1}}</td>

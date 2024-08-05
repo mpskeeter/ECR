@@ -14,13 +14,21 @@
      
              <div class="border">
                   <span class="bold left-align">Created Date:</span>
-                  <span class="right-align">{{ecr()?.createdDate}}</span>
+                  <span class="right-align">{{ecr()?.createdDate | date:'shortDate'}}</span>
              </div>
          </div>
          <div style="display: Flex; flex: 1; flex-direction: column; align-items: stretch;"
               class="border">
             <span class="bold left-align">Creator Signature:</span>
-            <span class="right-align">{{ecr()?.signature}}</span>
+            <span class="right-align" >
+               @if(ecr()?.signature) {
+               <img 
+                    [src]="ecr()?.signature" 
+                    [width]="signaureWidth()/2"
+                    [height]="signatureHeight()/5"
+               >
+               }
+            </span>
         </div>
     </div>
     <app-ecr-page-block label="Supporting Documents"

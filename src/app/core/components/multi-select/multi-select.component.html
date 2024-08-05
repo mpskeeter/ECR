@@ -1,0 +1,8 @@
+<mat-form-field>
+    <mat-label>Request Code</mat-label>
+    <mat-select [formControl]="selection" multiple>
+      @for (item of data(); track item) {
+        <mat-option [value]="item.id">{{item.label}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
