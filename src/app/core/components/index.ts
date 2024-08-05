@@ -6,3 +6,5 @@ export * from './button';
 export * from './icon';
 export * from './line-chart'
 export * from './form-control-value-accessor-connector'
+export * from './signature-pad'
+export * from './multi-select'

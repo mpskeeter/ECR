@@ -1,13 +1,19 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { Ecr, ecrData } from '../interfaces';
 import { BehaviorSubject } from 'rxjs';
-import { BaseStateService } from '../../core';
+import { BaseStateService, MultiSelect } from '../../core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EcrService extends BaseStateService<Ecr>{
-
+  signatureHeight=signal<number>(100);
+  signatureWidth=signal<number>(450);
+  requestCode=signal<MultiSelect[]>([
+    {id:1,label:'SQ/HW Change'},
+    {id:2,label:'Data/Data Architecture Change'},
+    {id:3,label:'Code/SW Architecture Change'}
+  ]);
   ecrs=signal<Ecr[]>(ecrData);
 
   // items = new BehaviorSubject<Ecr[]>([]);

@@ -8,7 +8,7 @@ export interface Ecr extends BaseEntity{
     changeSeverity:string;
     changePriority:number;
     requestNumber:number;
-    requestCode:number;
+    requestCode:number[];
     description:string;
     solutionRequirements:string;
     creator:string;
@@ -26,7 +26,7 @@ export const ecrData=[
         changeSeverity:'1',
         changePriority:1,
         requestNumber:1,
-        requestCode:1,
+        requestCode:[1],
         description:'See individual items from ECR - Evaluation Sheets.',
         solutionRequirements:'',
         creator:'ggg',
@@ -42,7 +42,7 @@ export const ecrData=[
         changeSeverity:'1',
         changePriority:1,
         requestNumber:1,
-        requestCode:1,
+        requestCode:[1,2,3],
         description:'See individual items from ECR - Evaluation Sheets.',
         solutionRequirements:'',
         creator:'Ethan',
@@ -60,7 +60,7 @@ export const ecrForm = (fb:FormBuilder, ecr?:Ecr) => fb.group({
     changeSeverity: new FormControl(ecr?.changeSeverity || ''),
     changePriority: new FormControl(ecr?.changePriority || 0),
     requestNumber: new FormControl(ecr?.requestNumber || 0),
-    requestCode: new FormControl(ecr?.requestCode || 0),
+    requestCode: new FormControl(ecr?.requestCode || []),
     description: new FormControl(ecr?.description || ''),
     solutionRequirements: new FormControl(ecr?.solutionRequirements || ''),
     creator: new FormControl(ecr?.creator || '',[Validators.required]),

@@ -17,6 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { PullRequestService, RepositoryService } from '../../../github';
 import { AuthService } from '../../../core';
 import { PullRequestTableComponent } from '../../../pull-request/components/commit-table';
+import { SignaturePadComponent } from "../../../core/components/signature-pad/signature-pad.component";
+import { MultiSelectComponent } from "../../../core/components/multi-select/multi-select.component";
 
 @Component({
     selector: 'app-ecr-form',
@@ -29,11 +31,13 @@ import { PullRequestTableComponent } from '../../../pull-request/components/comm
     MatInputModule,
     JsonPipe,
     MatDatepickerModule,
-    MatIcon, 
-    PullRequestTableComponent, 
+    MatIcon,
+    PullRequestTableComponent,
     ProjectSelectComponent,
     MatSelectModule,
-    AsyncPipe,],
+    AsyncPipe,
+    SignaturePadComponent, 
+    MultiSelectComponent],
     
     providers: [provideNativeDateAdapter()],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,7 +56,19 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
   valueCreatedDate = new Date();
 
   pullRequestVal = signal<string[]>(this.service.item()?.pullRequest || []);
-
+  get signature() {
+    return this.service.item()?.signature;
+  }
+  
+  set signature(value) {
+    this.service.state.update((state) => ({
+      ...state,
+      item: {
+      ...state.item,
+      signature: value || '',
+      } as Ecr,
+    }));
+  }
   constructor() {
     this.repositoryService.getAll();
     // effect(() => this.ecrForm=ecrForm(this.fb,this.service.item()));
@@ -114,9 +130,9 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
   get createdDate() {
     return this.ecrForm.get('createdDate') as FormControl;
   }
-  get signature() {
-    return this.ecrForm.get('signature') as FormControl;
-  }
+  // get signature() {
+  //   return this.ecrForm.get('signature') as FormControl;
+  // }
   get documents() {
     return this.ecrForm.get('documents') as FormControl;
   }
@@ -143,6 +159,7 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
     ecr={
       ...ecr,
       id:this.ecrId,
+      signature: this.signature || '',
     };
     console.log(ecr);
     this.service.save(ecr);

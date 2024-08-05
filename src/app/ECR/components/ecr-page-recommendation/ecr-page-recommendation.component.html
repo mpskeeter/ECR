@@ -19,17 +19,39 @@
                         <app-ecr-page-block [height]="250">
                         <div>{{recommendation}}</div>
                         <div>
-                                <span class="align-left">Name:</span>
-                                <span class="align-right">Promote</span>
-                                <span class="align-right">Promote</span>
+                                <span class="left-align">Name:</span>
+                                <span class="right-align right-align-date">/&nbsp;&nbsp;&nbsp;&nbsp;/</span>
+
                         </div>
                         <div>
-                                <span class="align-left">Deparment:</span>
-                                <span class="align-right">Defer</span>
+                                <span style="border-bottom: 1px solid black;">
+                                        @for(i of underline; track i) {
+                                                &nbsp;
+                                        }
+                                </span>
+                                <span class="right-align">Promote</span>
                         </div>
                         <div>
-                                <span class="align-left">Signature:</span>
-                                <span class="align-right">Close</span>
+                                <span class="left-align">Deparment:</span>
+                        </div>
+                        <div>
+                                <span style="border-bottom: 1px solid black;">
+                                        @for(i of underline; track i) {
+                                                &nbsp;
+                                        }
+                                </span>
+                                <span class="right-align">Defer</span>
+                        </div>
+                        <div>
+                                <span class="left-align">Signature:</span>
+                        </div>
+                        <div>
+                                <span style="border-bottom: 1px solid black;">
+                                        @for(i of underline; track i) {
+                                                &nbsp;
+                                        }
+                                </span>
+                                <span class="right-align">Close</span>
                         </div>
                 </app-ecr-page-block>
                 </div>
