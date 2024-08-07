@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build-ghp": "ng build --output-path docs --base-href /ECR/",
+    "build-docker": "docker build -t \"ekue2002/ecr:0.0.1\" .",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

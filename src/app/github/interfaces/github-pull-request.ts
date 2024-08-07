@@ -1,6 +1,5 @@
-import { BaseEntity } from "../../core";
-import { ColumnDef } from "../../core/interfaces/column-def";
-import { GithubUser } from "./github-user";
+import { BaseEntity, ColumnDef } from "../../core";
+import { GithubUser } from "./github-user"
 
 export interface GithubPullRequest extends BaseEntity{
     url: string;

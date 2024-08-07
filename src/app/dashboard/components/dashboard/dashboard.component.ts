@@ -1,20 +1,21 @@
 import { Component, effect, inject } from '@angular/core';
 import { EcrTableComponent } from "../../../ECR";
-import { BarChartComponent } from '../../../core/components/bar-chart';
 import { ProjectSelectComponent } from '../../../project';
 import { CommitService } from '../../../github';
 import { JsonPipe } from '@angular/common';
 import { LineChartComponent } from "../../../core/components/line-chart/line-chart.component";
+// import { NewPrComponent } from "../../../pull-request";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     EcrTableComponent,
-    BarChartComponent,
     ProjectSelectComponent,
     JsonPipe,
-    LineChartComponent
+    LineChartComponent,
+    // NewPrComponent,
+    // PullRequestTableComponent
 ],
   providers: [
     CommitService,

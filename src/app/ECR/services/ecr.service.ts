@@ -14,12 +14,42 @@ export class EcrService extends BaseStateService<Ecr>{
     {id:2,label:'Data/Data Architecture Change'},
     {id:3,label:'Code/SW Architecture Change'}
   ]);
-  ecrs=signal<Ecr[]>(ecrData);
-
-  // items = new BehaviorSubject<Ecr[]>([]);
-  // items$ = this.items.asObservable();
-  // item = new BehaviorSubject<Ecr>({} as Ecr);
-  // item$ = this.item.asObservable();
+  ecrs=signal<Ecr[]>([
+    {
+        id:1,
+        title:'ECR1',
+        changeSeverity:'1',
+        changePriority:1,
+        requestNumber:1,
+        requestCode:[1],
+        description:'See individual items from ECR - Evaluation Sheets.',
+        solutionRequirements:'',
+        creator:'ggg',
+        createdDate:'07/17/2024',
+        signature:'',
+        documents:'',
+        repository:'ECR',
+        pullRequest:['17','19','20','23'],
+        // pullRequest:[],
+    },
+    {
+        id:2,
+        title:'ECR2',
+        changeSeverity:'1',
+        changePriority:1,
+        requestNumber:1,
+        requestCode:[1,2,3],
+        description:'See individual items from ECR - Evaluation Sheets.',
+        solutionRequirements:'',
+        creator:'Ethan',
+        createdDate:'10/31/2024',
+        signature:'',
+        documents:'',
+        repository:'merge-conf',
+        pullRequest:['7','8','9'],
+        // pullRequest:[],
+    },
+]);
 
   constructor() { 
     super();
@@ -37,13 +67,16 @@ export class EcrService extends BaseStateService<Ecr>{
       items: this.ecrs(),
     }));
   }
-  getById(id:number){
+
+  getById(id:number) {
+    console.log('ecrService.getById:', id)
     this.state.update((state) => ({
       ...state,
       item: this.ecrs().find((ecr) => ecr.id===id) || {} as Ecr,
       id
     }));
   }
+
   save(ecr:Ecr) {
     if(ecr.id>0)
     {
@@ -68,7 +101,5 @@ export class EcrService extends BaseStateService<Ecr>{
 
   delete(ecrID:number) {
     this.ecrs.update((ecrs) => ecrs.filter((ecr) => ecr.id !== ecrID));
-    // this.items.next(this.ecrs());
   }
-
 }

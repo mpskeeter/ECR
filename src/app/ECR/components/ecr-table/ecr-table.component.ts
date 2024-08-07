@@ -1,14 +1,17 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { EcrTableDef } from '../../interfaces';
 import { EcrService } from '../../services/ecr.service';
-import { TableComponent, ScrollableComponent, TableAction } from "../../../core";
-import { Router } from '@angular/router';
-import { ButtonComponent } from "../../../core/components/button/button.component";
+import { ButtonComponent, ScrollableComponent, TableAction, TableComponent } from "../../../core";
 
 @Component({
   selector: 'app-ecr-table',
   standalone: true,
-  imports: [ScrollableComponent, TableComponent, ButtonComponent],
+  imports: [
+    ButtonComponent,
+    ScrollableComponent,
+    TableComponent,
+  ],
   templateUrl: './ecr-table.component.html',
   styleUrl: './ecr-table.component.scss'
 })
@@ -23,7 +26,10 @@ export class EcrTableComponent {
     {
       label:'Edit',
       icon:'edit',
-      action: (row) => this.router.navigate(['ecr-edit', row.id])
+      action: (row) => {
+        console.log('ecr edit');
+        this.router.navigate(['ecr-edit', row.id]);
+      }
     },
     {
       label:'Delete',

@@ -124,6 +124,8 @@ export class TableComponent {
     }
 
     this.selection.select(...this.dataSource.data);
+
+    this.sendSelected();
   }
 
   sendSelected(){
