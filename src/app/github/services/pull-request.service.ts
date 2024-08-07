@@ -26,7 +26,7 @@ export class PullRequestService extends BaseCrudService<GithubPullRequest>{
             ...state,
             items: data?.map((item) =>({
               ...item,
-              name: item.name || item.sha || item.number?.toString()
+              name: item.name || item.number?.toString() || item.sha 
             })) || []
           }));
         } ,

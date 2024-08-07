@@ -1,17 +1,12 @@
-<!-- <div> -->
-    <div style="flex-direction: row; justify-content: flex-end; width: 100%; display: flex; padding-bottom: 25px;">
-        <app-button icon="add_circle" text="Add" (click)="createRecord()"></app-button>   
-    </div>
-<!-- <div> -->
-    <app-scrollable [height]="600">
-        <!-- <pre>{{selected}}</pre> -->
-        <app-table
-        [rows]="(service.items()) || []" 
-        [columns]="columnDef"
-        [displaySelect]="displaySelect"
-        [actions]="actions"
-        [selected]="selected" 
-        />
-    </app-scrollable>
-<!-- </div> -->
-<!-- </div> -->
+<div style="flex-direction: row; justify-content: flex-end; width: 100%; display: flex; padding-bottom: 25px;">
+    <app-button icon="add_circle" text="Add" (click)="createRecord()"></app-button>   
+</div>
+<app-scrollable [height]="600">
+    <app-table
+    [rows]="service.items() || []" 
+    [columns]="columnDef"
+    [displaySelect]="displaySelect"
+    [actions]="actions"
+    [selected]="selected" 
+    />
+</app-scrollable>

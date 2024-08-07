@@ -60,6 +60,8 @@ export class LineChartComponent {
 
   xTicks = (slice: number) => this.x()?.ticks().slice(slice);
   yTicks = (slice: number) => this.y()?.ticks((this.yData() - this.min()) / this.yStep).slice(slice)
+  
+  private xGrid = signal(this.xTicks(0));
 
   private yStep = 10;
 
@@ -166,14 +168,14 @@ export class LineChartComponent {
   };
 
   constructor() {
-    effect(() => {
+    // effect(() => {
       // Define the x and y domains
-      this.x().domain(d3.extent(this.data(), d => new Date(d.date)) as Date[]);
-      this.y().domain([this.min(), d3.max(this.data(), d => d.value as number) || 0]);
+    effect(() => this.x().domain(d3.extent(this.data(), d => new Date(d.date)) as Date[]));
+    effect(() => this.y().domain([this.min(), d3.max(this.data(), d => d.value as number) || 0]));
 
-      this.drawAxes(this.data());
-      this.drawData(this.data());
-      this.drawTooltip(this.data());
-    });
+    effect(() => this.drawAxes(this.data()));
+    effect(() => this.drawData(this.data()));
+    effect(() => this.drawTooltip(this.data()));
+    // });
   }
 }

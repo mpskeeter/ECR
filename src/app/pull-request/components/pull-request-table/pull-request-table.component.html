@@ -1,0 +1,10 @@
+<h3>hello</h3>
+<app-scrollable [height]="600">
+    @if (prListAvailable().length || 0 > 0) {
+        <app-table
+            [rows]="prListAvailable()" 
+            [columns]="columnDef"
+            [(selected)]="selected" 
+            />
+    } 
+</app-scrollable>

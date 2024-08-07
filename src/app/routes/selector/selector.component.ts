@@ -1,17 +1,12 @@
 import { Component, effect, inject } from '@angular/core';
-import { ProjectSelectComponent } from '../../project/components/project-select/project-select.component';
-import { BranchSelectComponent } from '../../branch/components/branch-select/branch-select.component';
-import { ReleaseSelectComponent } from '../../release/components/release-select/release-select.component';
-import { CommitSelectComponent } from '../../commit/components/commit-select/commit-select.component';
-import { CommitTableComponent } from '../../commit/components/commit-table/commit-table.component';
-import { ResponseBoxComponent } from '../../core/components/response-box';
-import { TextBoxComponent } from '../../core/components/text-box';
-import { DateTimeComponent } from '../../core/components/date-time';
-import { EcrTableComponent } from "../../ECR/components/ecr-table/ecr-table.component";
-import { EcrCardComponent } from "../../ECR/components/ecr-card/ecr-card.component";
-import { CommitService, IssueService } from '../../github';
 import { JsonPipe } from '@angular/common';
-import { PullRequestTableComponent } from '../../pull-request/components/commit-table';
+import { ProjectSelectComponent } from '../../project';
+import { BranchSelectComponent } from '../../branch';
+import { CommitSelectComponent } from '../../commit';
+import { PullRequestTableComponent } from '../../pull-request';
+import { CommitService, IssueService } from '../../github';
+import { EcrCardComponent, EcrTableComponent } from "../../ECR";
+import { NewPrComponent } from "../../pull-request/components/new-pr/new-pr.component";
 
 @Component({
   selector: 'app-selector',
@@ -19,15 +14,12 @@ import { PullRequestTableComponent } from '../../pull-request/components/commit-
   imports: [
     ProjectSelectComponent,
     BranchSelectComponent,
-    ReleaseSelectComponent,
     CommitSelectComponent,
     PullRequestTableComponent,
-    ResponseBoxComponent,
-    TextBoxComponent,
-    DateTimeComponent,
     EcrTableComponent,
     EcrCardComponent,
-    JsonPipe
+    JsonPipe,
+    NewPrComponent
 ],
 providers:[IssueService,],
   templateUrl: './selector.component.html',
@@ -37,8 +29,11 @@ export class SelectorComponent {
   issueService=inject(IssueService);
   commitService=inject(CommitService);
 
-  eff= effect(() =>{
-    this.issueService.getForRepository()
-    this.commitService.getForRepository()
-  });
+  constructor() {
+    effect(() =>{
+      this.issueService.getForRepository()
+      this.commitService.getForRepository()
+    });
+  }
+
 }

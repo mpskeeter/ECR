@@ -41,5 +41,14 @@
     <app-ecr-page-block label="ECB Evaluators:" 
                         content="" 
                         labelBackgroundColor="#8c8c8c"
-                        contentBackgroundColor="#d9d9d9"/>
+                        contentBackgroundColor="#d9d9d9">
+                    @for(evaluator of evaluators; track evaluator)
+                    {
+                    <div>
+                              <span class="left-align bold">Name:</span>
+                              <span class="right-align bold">Deparment:</span>
+                    </div>
+                    }
+                    
+                    </app-ecr-page-block>
 </div>

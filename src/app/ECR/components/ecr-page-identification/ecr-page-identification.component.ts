@@ -17,5 +17,7 @@ export class EcrPageIdentificationComponent {
   ecr=input<Ecr | undefined>({} as Ecr);
   signatureHeight=input.required<number>();
   signaureWidth=input.required<number>();
-  title='SCLIS ECR Identification and Disposition Cover Page'
+  title='SCLIS ECR Identification and Disposition Cover Page';
+  evaluators=[1,2,3,4]
+
 }

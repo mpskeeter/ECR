@@ -1,44 +1,49 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, inject, OnInit, signal } from '@angular/core';
-import { Ecr, ecrData, ecrForm } from '../../interfaces';
-import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { ResponseBoxComponent } from "../../../core/components/response-box/response-box.component";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  OnInit,
+  signal
+} from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReactiveFormsModule, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AsyncPipe, JsonPipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
-import { EcrService } from '../../services/ecr.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
-import { CommitTableComponent } from "../../../commit/components/commit-table/commit-table.component";
-import { ProjectSelectComponent } from "../../../project/components/project-select/project-select.component";
 import { MatSelectModule } from '@angular/material/select';
+import { Ecr, ecrForm } from '../../interfaces';
+import { EcrService } from '../../services/ecr.service';
+import { map } from 'rxjs';
+import { ProjectSelectComponent } from "../../../project";
 import { PullRequestService, RepositoryService } from '../../../github';
-import { AuthService } from '../../../core';
-import { PullRequestTableComponent } from '../../../pull-request/components/commit-table';
-import { SignaturePadComponent } from "../../../core/components/signature-pad/signature-pad.component";
-import { MultiSelectComponent } from "../../../core/components/multi-select/multi-select.component";
+import { AuthService, MultiSelectComponent, SignaturePadComponent } from '../../../core';
+import { PullRequestTableComponent } from '../../../pull-request';
+import { NewPrComponent } from "../../../pull-request/components/new-pr/new-pr.component";
 
 @Component({
     selector: 'app-ecr-form',
     standalone: true,
     templateUrl: './ecr-form.component.html',
     styleUrl: './ecr-form.component.scss',
-    imports: [ReactiveFormsModule,
-    ResponseBoxComponent,
-    MatFormFieldModule,
-    MatInputModule,
+    imports: [
     JsonPipe,
     MatDatepickerModule,
+    MatFormFieldModule,
     MatIcon,
-    PullRequestTableComponent,
-    ProjectSelectComponent,
+    MatInputModule,
     MatSelectModule,
-    AsyncPipe,
-    SignaturePadComponent, 
-    MultiSelectComponent],
-    
+    MultiSelectComponent,
+    ProjectSelectComponent,
+    PullRequestTableComponent,
+    ReactiveFormsModule,
+    SignaturePadComponent,
+    NewPrComponent
+],  
     providers: [provideNativeDateAdapter()],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -52,10 +57,28 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
   pullRequestService=inject(PullRequestService);
 
   ecrId:number = 0;
-  ecrForm=ecrForm(this.fb,this.service.item());
+  // form: FormGroup  = ecrForm(this.fb,this.service.item());
+  form = this.fb.group({
+    id: new FormControl(0),
+    title: new FormControl('',[Validators.required]),
+    changeSeverity: new FormControl(''),
+    changePriority: new FormControl(0),
+    requestNumber: new FormControl(0),
+    requestCode: new FormControl([0]),
+    description: new FormControl(''),
+    solutionRequirements: new FormControl(''),
+    creator: new FormControl('',[Validators.required]),
+    createdDate: new FormControl(new Date('')),
+    signature: new FormControl(''),
+    documents: new FormControl(''),
+    repository: new FormControl('',[Validators.required]),
+    pullRequest: new FormControl(['']),
+  });
+
   valueCreatedDate = new Date();
 
   pullRequestVal = signal<string[]>(this.service.item()?.pullRequest || []);
+
   get signature() {
     return this.service.item()?.signature;
   }
@@ -69,30 +92,50 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
       } as Ecr,
     }));
   }
+
   constructor() {
+    console.log('ecrForm:constructor');
     this.repositoryService.getAll();
-    // effect(() => this.ecrForm=ecrForm(this.fb,this.service.item()));
-    // effect(() => console.log(this.service.state()))
+    effect(() => {
+      const ecr = {
+        ...this.service.item(),
+        id: this.service.item()?.id || 0,
+        title: this.service.item()?.title || '',
+        changeSeverity: this.service.item()?.changeSeverity || '',
+        changePriority: this.service.item()?.changePriority || 0,
+        requestNumber: this.service.item()?.requestNumber || 0,
+        requestCode: this.service.item()?.requestCode || [],
+        description: this.service.item()?.description || '',
+        solutionRequirements: this.service.item()?.solutionRequirements || '',
+        creator: this.service.item()?.creator || '',
+        signature: this.service.item()?.signature || '',
+        documents: this.service.item()?.documents || '',
+        repository: this.service.item()?.repository || '',
+        pullRequest: this.service.item()?.pullRequest || [],    
+        createdDate: new Date(this.service.item()?.createdDate || ''),
+      };
+      this.form.setValue(ecr);
+    });
   }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      map(params => {
-        this.ecrId = Number(params.get('id'));
-        this.service.getById(this.ecrId);
-        this.ecrForm=ecrForm(this.fb,this.service.item());
-      })
-    )
-    .subscribe();
-    this.repository?.valueChanges.subscribe((value) => {
+    this.route.paramMap
+      .pipe(
+        map(params => {
+          console.log('params:', params);
+          this.ecrId = Number(params.get('id'));
+          if (this.ecrId !== 0)
+            this.service.getById(this.ecrId);
+        })
+      )
+      .subscribe();
+
+    this.repository?.valueChanges
+      .subscribe((value) => {
       // console.log(value);
       this.authService.setRepository(value as string);
       this.pullRequestService.getForRepository();
-    });
-    // this.ecrForm.get('creator')?.valueChanges.subscribe((value) => {
-    //   console.log(value);
-    // });
-
+      });
   }
 
   ngAfterViewInit() {
@@ -101,61 +144,70 @@ export class EcrFormComponent implements OnInit, AfterViewInit {
   }
 
   get id() {
-    return this.ecrForm.get('id');
+    return this.form?.get('id');
   }
+
   get title() {
-    return this.ecrForm.get('title') as FormControl;
+    return this.form?.get('title') as FormControl;
   }
+
   get changeSeverity() {
-    return this.ecrForm.get('changeSeverity') as FormControl;
+    return this.form?.get('changeSeverity') as FormControl;
   }
+
   get changePriotity() {
-    return this.ecrForm.get('changePriotity');
+    return this.form?.get('changePriotity');
   }
+
   get requestNumber() {
-    return this.ecrForm.get('requestNumber') as FormControl;
+    return this.form?.get('requestNumber') as FormControl;
   }
+
   get requestCode() {
-    return this.ecrForm.get('requestCode') as FormControl;
+    return this.form?.get('requestCode') as FormControl;
   }
+
   get description() {
-    return this.ecrForm.get('description') as FormControl;
+    return this.form?.get('description') as FormControl;
   }
+
   get solutionRequirements() {
-    return this.ecrForm.get('solutionRequirements') as FormControl;
+    return this.form?.get('solutionRequirements') as FormControl;
   }
+
   get creator() {
-    return this.ecrForm.get('creator') as FormControl;
+    return this.form?.get('creator') as FormControl;
   }
+
   get createdDate() {
-    return this.ecrForm.get('createdDate') as FormControl;
+    return this.form?.get('createdDate') as FormControl;
   }
-  // get signature() {
-  //   return this.ecrForm.get('signature') as FormControl;
-  // }
+
   get documents() {
-    return this.ecrForm.get('documents') as FormControl;
+    return this.form?.get('documents') as FormControl;
   }
+
   get repository() {
-    return this.ecrForm.get('repository');
+    return this.form.get('repository');
   }
 
   get pullRequest() {
-    return this.ecrForm.get('pullRequest') as FormControl;
+    return this.form.get('pullRequest') as FormControl;
   }
 
   get pullRequestValues(): string[] {
     // return (this.ecrForm.value as unknown as Ecr).commits?.map((item) => item.commit) || [];
-    return (this.ecrForm.value as unknown as Ecr).pullRequest || [];
+    return (this.form.value as unknown as Ecr).pullRequest || [];
     // return (this.ecrForm.value as unknown as Ecr).commits || [];
   }
+
   setPullRequest(values: string[]) {
     console.log(values);
     this.pullRequest.setValue(values);
   }
 
   onClick(){
-    let ecr=(this.ecrForm.value as unknown as Ecr);
+    let ecr=(this.form?.value as unknown as Ecr);
     ecr={
       ...ecr,
       id:this.ecrId,

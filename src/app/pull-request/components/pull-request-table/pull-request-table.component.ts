@@ -1,6 +1,6 @@
-import { Component, computed, effect, inject, input, model } from '@angular/core';
-import { ScrollableComponent,TableComponent } from '../../../core';
+import { Component, computed, effect, inject, input, model, OnInit } from '@angular/core';
 import { JsonPipe } from '@angular/common';
+import { ScrollableComponent,TableComponent } from '../../../core';
 import { PullRequestService, GithubPullRequestTableDef } from '../../../github';
 import { EcrService } from '../../../ECR';
 
@@ -12,10 +12,14 @@ import { EcrService } from '../../../ECR';
     ScrollableComponent,
     JsonPipe,
   ],
+  providers: [
+    PullRequestService,
+    EcrService,
+  ],
   templateUrl: './pull-request-table.component.html',
   styleUrl: './pull-request-table.component.scss'
 })
-export class PullRequestTableComponent {
+export class PullRequestTableComponent implements OnInit{
   columnDef=GithubPullRequestTableDef;
   ecrId=input<number>();
   service=inject(PullRequestService);
@@ -32,9 +36,12 @@ export class PullRequestTableComponent {
   prListAvailable=computed(() => 
     this.service.items()?.filter((item) => 
       !this.prList().includes(item.number.toString())
-    )
+    ) || []
   );
-  constructor(){
+
+  constructor() {}
+  
+  ngOnInit() {
     this.service.getForRepository();
     this.ecrService.getAll();
   }
